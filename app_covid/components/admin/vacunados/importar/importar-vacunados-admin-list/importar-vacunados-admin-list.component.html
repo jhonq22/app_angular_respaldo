@@ -1,0 +1,140 @@
+  <div id="wrapper">
+
+        <!-- Top Bar Start -->
+       <app-sidebar></app-sidebar>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+       <app-menu-general></app-menu-general>
+        <!-- Left Sidebar End -->
+
+       <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+               
+
+          
+           <div class="container-fluid">
+                    <div class="page-title-box">
+
+                        <div class="row align-items-center ">
+                            <div class="col-md-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Listado de Vacunados De Sistema Patria</h4>
+                                  
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="float-right ">
+                                    <input type="text" class="form-control" [(ngModel)]="filter" name="filter" placeholder="Buscar...">
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page-title -->
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="mt-0 header-title">Listado de Vacunados De Sistema Patria</h4>
+                                         <div class="float-right ">
+                                  
+                                  
+                                  
+                                </div>
+                         
+
+                                    
+
+                                    <div class="table-rep-plugin">
+                                        <div class="table-responsive b-0" data-pattern="priority-columns">
+                                            <table id="tech-companies-1" class="table  table-striped">
+                                                <thead>
+                                         <tr >
+                                                        <th data-priority="1">Nacionalidad/Cedula</th>
+                                                        <th data-priority="1">Nombres</th>
+                                                        <th data-priority="1">Fecha Nacimiento</th>
+                                                        <th data-priority="1">Edad</th>
+                                                        <th data-priority="1">Telefono</th>
+                                                        <th data-priority="1">Estado</th>
+                                                        <th data-priority="1">Centro Salud</th>
+                                                        <th data-priority="1">Grupo Especial</th>
+                                                        <th data-priority="1">Estatus</th>
+                                                      
+                                                        <th data-priority="1">Fecha Registro</th>
+                                                        <th data-priority="1">Acción</th>
+                                                       
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let tipo of vacunados
+                                          | filter: filter 
+                                          | paginate: { itemsPerPage: 10, currentPage: paginate }
+                                           ;let indice=index">
+
+                                                        <td class="h-float">{{tipo.tipo_identificacion}} - {{tipo.cedula}}</td>
+                                                        <td class="h-float">{{tipo.nombres | titlecase}}</td>
+                                                        <td class="h-float">{{tipo.fecha_nacimiento }}</td>
+                                                        <td class="h-float">{{tipo.edad}}</td>
+                                                        <td class="h-float">{{tipo.telefono}}</td>
+                                                         <td class="h-float">{{tipo.estado | titlecase}}</td>
+                                                        <td class="h-float">{{tipo.centro_salud | titlecase}}</td>
+                                                        <td class="h-float">{{tipo.grupo_especial | titlecase}}</td>
+                                                        <td class="h-float">{{tipo.nombre_estatus | titlecase}}</td>
+                                                        <td class="h-float">{{tipo.created_at | date}}</td>
+                                                        
+
+                                    
+                                                                                                      
+                                                        <td> 
+                                                            <a ><img class="h-rotate-360" src="assets/iconos/editar.png" 
+                                                            [routerLink]="['/vacunados/importar/admin/edit', tipo.id]">
+                                                            </a>  
+                                                        </td>
+                                                     
+                                                    </tr>
+                                                
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                                <pagination-controls 
+                    (pageChange)="paginate = $event"  
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" >
+                  </pagination-controls>
+                        </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                </div>
+
+
+
+
+
+            <!-- content -->
+
+            <footer class="footer">
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>

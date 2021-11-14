@@ -1,0 +1,15 @@
+<button (click)="PDFGeneral()" class="btn btn-primary">Descargar PDF</button>
+
+
+ <ngx-qrcode 
+  
+                                          [errorCorrectionLevel]="correctionLevel"
+                                          [value]="valueqr"
+                                          id="qr"
+                                          [elementType]="elementType"
+                                          alt="Demo QR Code"
+                                          cssClass="bshadow">
+                                          </ngx-qrcode>
+
+{{elementType}}
+                                          

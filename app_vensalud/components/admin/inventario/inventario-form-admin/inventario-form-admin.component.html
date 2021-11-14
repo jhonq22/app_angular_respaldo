@@ -1,0 +1,414 @@
+<div class="wrapper">
+
+    <!-- Navbar -->
+   <app-navbar></app-navbar>
+    <!-- /.navbar -->
+  
+    <!-- Main Sidebar Container -->
+  <app-sidebar></app-sidebar>
+  
+    <!-- Content Wrapper. Contains page content -->
+    
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+               
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a [routerLink]="['/inventario/admin/list']">Inventario</a></li>
+                  <li class="breadcrumb-item active">Agregar</li>
+                </ol>
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+
+          <div class="container-fluid">
+            <div class="row">
+              <!-- left column -->
+
+              <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Agregar Inventario</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                 
+                <form role="form" [formGroup]="Form">
+                  <div class="card-body">
+
+                    <div class="form-row">
+
+                      <div class="form-group col-md-6">
+                        <label >Estado:</label>
+                        <select type="text" class="form-control" placeholder="Ingresar"
+                        [ngClass]=" Form.controls['estado_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                         formControlName="estado_id" [(ngModel)]="inventario.estado_id"  (change)="getMunicipios($event.target.value)"         
+                         >
+                       
+                       <option *ngFor="let estado of estados" value="{{estado.id}}">{{estado.estado}}</option>
+                       </select>
+                       
+                       <div class="invalid-feedback"
+                       *ngIf="Form.controls['estado_id'].touched && 
+                        Form.controls['estado_id'].errors?.required" >
+                           Estado es Obligatorio...
+                       </div>
+                     </div>
+
+
+
+                     <div class="form-group col-md-6">
+                      <label >Municipio:</label>
+                       <select type="text" class="form-control" placeholder="Ingresar "
+                     [ngClass]=" Form.controls['municipio_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                      formControlName="municipio_id" [(ngModel)]="inventario.municipio_id" 
+                      (change)="getCentroSalud($event.target.value)"          
+                      >
+                    
+                      <option *ngFor="let municipio of municipios" value="{{municipio.id}}">{{municipio.municipio}}</option>
+                    </select>
+
+                    <div class="invalid-feedback"
+                    *ngIf="Form.controls['municipio_id'].touched && 
+                     Form.controls['municipio_id'].errors?.required"   >
+                        Municipio es Obligatorio...
+                    </div>
+
+                   </div>
+                   
+                    </div>
+
+                   
+
+
+                <div class="form-row">
+                      
+                      <div class="form-group col-md-12">
+                        <label>Centro Salud</label>
+                        <select type="text" class="form-control" placeholder="Ingresar Centro de Salud"
+                         [ngClass]=" Form.controls['centro_salud_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                         formControlName="centro_salud_id" [(ngModel)]="inventario.centro_salud_id"           
+                        >
+                    
+                      <option *ngFor="let centrossalud of centrosalud" value="{{centrossalud.id}}">{{centrossalud.centro_salud}}</option>
+                    </select>
+
+                            <div class="invalid-feedback"
+                            *ngIf="Form.controls['centro_salud_id'].touched && 
+                            Form.controls['centro_salud_id'].errors?.required"   >
+                                Centro de Salud es Obligatorio...
+                            </div>
+                     </div>
+                 </div>
+
+
+                 <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                      <label >Servicio Médico:</label>
+                      <input type="text" class="form-control" placeholder="Ingresar Servicio Médico"
+                      [ngClass]=" Form.controls['servicio_medico'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                      formControlName="servicio_medico" [(ngModel)]="inventario.servicio_medico"           
+                      >
+
+                    <div class="invalid-feedback"
+                    *ngIf="Form.controls['servicio_medico'].touched && 
+                     Form.controls['servicio_medico'].errors?.required"   >
+                        Servicio Medico es Obligatorio...
+                    </div>
+                   </div>
+
+
+
+                   <div class="form-group col-md-6">
+                    <label >Piso:</label>
+                    <input type="text" class="form-control" placeholder="Ingresar Piso "
+                    [ngClass]=" Form.controls['piso'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                    formControlName="piso" [(ngModel)]="inventario.piso"           
+                    >
+
+                 </div>
+                  </div>
+
+
+                  <div class="form-row">
+
+                    <div class="form-group col-md-4">
+                      <label>Equipo</label>
+                      <select type="text" class="form-control" placeholder="Ingresar Centro de Salud"
+                       [ngClass]=" Form.controls['equipo_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                       formControlName="equipo_id" [(ngModel)]="inventario.equipo_id"           
+                      >
+                  
+                    <option *ngFor="let equipo of equipos" value="{{equipo.id}}">{{equipo.equipo}}</option>
+                  </select>
+
+                          <div class="invalid-feedback"
+                          *ngIf="Form.controls['equipo_id'].touched && 
+                          Form.controls['equipo_id'].errors?.required"   >
+                              Equipos es Obligatorio...
+                          </div>
+                   </div>
+
+
+
+                   <div class="form-group col-md-4">
+                    <label >Numero Bien Nacional:</label>
+                    <input type="text" class="form-control" placeholder="Ingresar Número Bien Nacional "
+                    [ngClass]=" Form.controls['numero_bien_nacional'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                    formControlName="numero_bien_nacional" [(ngModel)]="inventario.numero_bien_nacional"           
+                    >
+    
+                  <div class="invalid-feedback"
+                  *ngIf="Form.controls['numero_bien_nacional'].touched && 
+                   Form.controls['numero_bien_nacional'].errors?.required"   >
+                      Numero Bien Nacional es Obligatorio...
+                  </div>
+    
+                 </div>
+
+
+                
+
+
+
+                 
+                 <div class="form-group col-md-4">
+                    <label >Modelo:</label>
+                    <input type="text" class="form-control" placeholder="Ingresar Modelo "
+                      [ngClass]=" Form.controls['modelo'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                      formControlName="modelo" [(ngModel)]="inventario.modelo"           
+                      >
+
+                    <div class="invalid-feedback"
+                    *ngIf="Form.controls['modelo'].touched && 
+                     Form.controls['modelo'].errors?.required"   >
+                        Modelo es Obligatorio...
+                    </div>
+                 </div>
+              </div>
+                  
+
+
+              <div class="form-row">
+
+                <div class="form-group col-md-5">
+                  <label >Serial:</label>
+                  <input type="text" class="form-control" placeholder="Ingresar Serial "
+                  [ngClass]=" Form.controls['serial'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                  formControlName="serial" [(ngModel)]="inventario.serial"           
+                  >
+
+                <div class="invalid-feedback"
+                *ngIf="Form.controls['serial'].touched && 
+                 Form.controls['serial'].errors?.required"   >
+                    Serial es Obligatorio...
+                </div>
+               </div>
+
+
+               <div class="form-group col-md-4">
+                <label>Marca</label>
+                <select type="text" class="form-control" placeholder="Ingresar Centro de Salud"
+                 [ngClass]=" Form.controls['marca_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                 formControlName="marca_id" [(ngModel)]="inventario.marca_id"           
+                >
+            
+              <option *ngFor="let marca of marcas" value="{{marca.id}}">{{marca.marca}}</option>
+            </select>
+
+                    <div class="invalid-feedback"
+                    *ngIf="Form.controls['marca_id'].touched && 
+                    Form.controls['marca_id'].errors?.required"   >
+                        Marca es Obligatorio...
+                    </div>
+             </div>
+
+
+             <div class=" form-group  col-md-3 ">
+               
+               <button 
+               class="btn btn-primary ml-4" 
+               style="margin-top: 30px;"
+               (click)="VerificarMarcaSerial()">Verificar Serial y Marca</button>
+             </div>
+
+
+            
+              </div>
+
+
+
+              <div class="form-row">
+                      
+                      <div class="form-group col-md-12">
+                        <label>Proveedores de Servicio</label>
+                        <select type="text" class="form-control" placeholder="Ingresar"
+                     [ngClass]=" Form.controls['proveedor'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                      formControlName="proveedor" [(ngModel)]="inventario.proveedor">
+                    
+                    <option value="Vensalud">Vensalud</option>
+                    <option value="Taller nacional de electromedicina de Vensalud">Taller nacional de electromedicina de Vensalud</option>
+                    <option value="Meheco">Meheco</option>
+                    <option value="Combiomed">Combiomed</option>
+                    <option value="Cneuro">Cneuro</option>
+                    <option value="Cendit (Ministerio del Poder popular para la Ciencia y Tecnologia)">Cendit (Ministerio del Poder popular para la Ciencia y Tecnologia)</option>
+                    <option value="Comité de la Cruz Roja internacional.">Comité de la Cruz Roja internacional.</option>
+                    
+                    
+                   
+                    </select>
+
+                    <div class="invalid-feedback"
+                    *ngIf="Form.controls['proveedor'].touched && 
+                     Form.controls['proveedor'].errors?.required"   >
+                        Proveedor es Obligatorio...
+                    </div>
+                     </div>
+                 </div>
+
+
+
+                 <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                      <label >Estatus del Equipo:</label>
+                      <select type="text" class="form-control" placeholder="Ingresar "
+                     [ngClass]=" Form.controls['estatu_equipo_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                      formControlName="estatu_equipo_id" [(ngModel)]="inventario.estatu_equipo_id"           
+                      >
+                    
+                      <option *ngFor="let estatusequipo of estatusequipos" value="{{estatusequipo.id}}">{{estatusequipo.estatu_equipo}}</option>
+                    </select>
+
+                    <div class="invalid-feedback"
+                    *ngIf="Form.controls['estatu_equipo_id'].touched && 
+                     Form.controls['estatu_equipo_id'].errors?.required"   >
+                        Estatus del Equipo es Obligatorio...
+                    </div>
+                   </div>
+
+
+
+                   <div class="form-group col-md-6">
+                    <label >Condición:</label>
+                    <select type="text" class="form-control" placeholder="Ingresar"
+                     [ngClass]=" Form.controls['reparado'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                      formControlName="reparado" [(ngModel)]="inventario.reparado"           
+                      >
+                   <option *ngIf='inventario.estatu_equipo_id == 3 || inventario.estatu_equipo_id == 2' value="revision tecnica">Revisión Técnica</option>
+                   <option *ngIf='inventario.estatu_equipo_id == 1' value="mantenimiento preventivo">Mantenimiento Preventivo</option>
+                   <option *ngIf='inventario.estatu_equipo_id == 1' value="reparado">Reparado</option>
+                   <option *ngIf='inventario.estatu_equipo_id == 1' value="instalado">Instalado</option>
+                    <option *ngIf='inventario.estatu_equipo_id == 1' value="con fallas">Con Fallas</option>
+                   
+                    </select>
+
+                <div class="invalid-feedback"
+                    *ngIf="Form.controls['reparado'].touched && 
+                     Form.controls['reparado'].errors?.required"   >
+                        Condición es Obligatorio...
+                    </div>
+
+                 </div>
+                  </div>
+
+                  
+
+
+               
+<!-- 
+               <div class="form-row">
+                      
+                <div class="form-group col-md-12">
+                  <label>Fecha Instalación</label>
+               
+                <dp-date-picker type="text" class="form-control" placeholder="Ingresar Fecha "
+                [ngClass]=" Form.controls['fecha_instalacion'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                formControlName="fecha_instalacion" [(ngModel)]="inventario.fecha_instalacion" >
+              </dp-date-picker>
+
+              <div class="invalid-feedback"
+              *ngIf="Form.controls['fecha_instalacion'].touched && 
+               Form.controls['fecha_instalacion'].errors?.required"   >
+                  Fecha Instalación es Obligatorio...
+              </div>
+               </div>
+           </div>
+
+           
+              
+-->
+
+                  <div class="form-row">
+                      
+                    <div class="form-group col-md-12">
+                      <label>Observación</label>
+                      <textarea type="text" class="form-control" placeholder="Ingresar Observación "
+                      [ngClass]=" Form.controls['observacion'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                      formControlName="observacion" [(ngModel)]="inventario.observacion"           
+                      >
+                        
+                    </textarea>
+                   </div>
+               </div>
+                
+                  
+                   
+                    
+                    </div>
+                    <!-- /.card-body -->
+    
+            <div class="card-footer">
+             <button type="submit" *ngIf="!edit && marcasSeralVerificada == false"   class="btn btn-primary" >Por Favor Click al Boton Verificar</button>
+           <button type="submit" *ngIf="!edit && marcasSeralVerificada == true"  class="btn btn-primary" (click)="saveInventario()">Guardar</button>
+            <button type="submit" *ngIf="edit" class="btn btn-warning" (click)="updateInventario()">Actualizar</button>
+            <button  class="btn btn-danger m-2" [routerLink]="['/inventario/admin/list']" >Cancelar</button>
+
+            </div>
+
+            </form>
+        </div>
+                <!-- /.card -->
+    
+                          
+    
+              
+    
+              </div>
+              <!--/.col (left) -->
+
+
+              <!-- right column -->
+             
+              <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+
+
+
+
+    <!-- /.content-wrapper -->
+    <app-footer></app-footer>
+  
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>

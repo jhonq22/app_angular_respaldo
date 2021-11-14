@@ -1,0 +1,134 @@
+  <div id="wrapper">
+
+        <!-- Top Bar Start -->
+       <app-sidebar></app-sidebar>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+      <app-menu-general></app-menu-general>
+        <!-- Left Sidebar End -->
+
+       <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+               
+
+          
+           <div class="container-fluid">
+                    <div class="page-title-box">
+
+                        <div class="row align-items-center ">
+                            <div class="col-md-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Numeros de Lote y Fecha de Vencimiento</h4>
+                                  
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="float-right ">
+                                    <input type="text" class="form-control" [(ngModel)]="filter" name="filter" placeholder="Buscar...">
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page-title -->
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="mt-0 header-title">Numeros de Lote y Fecha de Vencimiento</h4>
+                                       <div class="float-right ">
+                                  
+                                    <button class="btn btn-danger h-shake mb-2 mr-2" target="_blank" (click)="PDFGeneral()">Exportar PDF</button>
+                                    <button class="btn btn-primary h-shake mb-2 mr-2" target="_blank" (click)="ExcelGeneral()">Exportar Excel</button>
+                                  
+                                </div>
+                         
+
+                                    
+
+                                    <div class="table-rep-plugin">
+                                        <div class="table-responsive b-0" data-pattern="priority-columns">
+                                            <table id="tech-companies-1" class="table  table-striped">
+                                                <thead>
+                                         <tr >
+                                                        <th data-priority="1">Tipos de Vacuna</th>
+                                                        <th data-priority="1">Numero de Lote</th>
+                                                        <th data-priority="1">Fecha de Vencimiento</th>
+                                                        <th data-priority="1">Numero Dosis Perdidas</th>
+                                                        <th data-priority="1">Causa de Perdida</th>
+                                                        <th data-priority="1">Usuario</th>
+                                                         <th data-priority="1">Estado</th>
+                                                        <th data-priority="1">Centro de Salud</th>
+                                                        <th data-priority="1">Acción</th>
+                                                       
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let tipo of vacunas
+                                          | filter: filter 
+                                          | paginate: { itemsPerPage: 10, currentPage: paginate }
+                                           ;let indice=index">
+
+                                                        <td class="h-float">{{tipo.nombre_vacuna | titlecase}}</td>
+                                                        <td class="h-float">{{tipo.numero_lote | titlecase}}</td>
+                                                        <td class="h-float">{{tipo.fecha_vencimiento | titlecase}}</td>
+                                                        <td class="h-float">{{tipo.numero_dosis_perdidas}}</td>
+                                                        <td class="h-float">{{tipo.causa_perdida | titlecase}}</td>
+                                                         <td class="h-float">{{tipo.name | titlecase}}</td>
+                                                         <td class="h-float">{{tipo.estado | titlecase}}</td>
+                                                          <td class="h-float">{{tipo.centro_salud | titlecase}}</td>
+                                    
+                                                                                                      
+                                                        <td> 
+                                                            <a ><img class="h-rotate-360" src="assets/iconos/editar.png" 
+                                                            [routerLink]="['/vacunas_perdidas/admin/edit', tipo.id]">
+                                                            </a>  
+                                                        </td>
+                                                     
+                                                    </tr>
+                                                
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                                <pagination-controls 
+                    (pageChange)="paginate = $event"  
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" >
+                  </pagination-controls>
+                        </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                </div>
+
+
+
+
+
+            <!-- content -->
+
+            <footer class="footer">
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>

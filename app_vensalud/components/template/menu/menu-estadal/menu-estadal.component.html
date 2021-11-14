@@ -1,0 +1,158 @@
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+     
+
+
+
+
+      <li class="nav-item h-shake">
+        <a [routerLink]="['/inicio']"  href="javascript:void(0)" class="nav-link">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Inicio</p>
+        </a>
+      </li>
+
+
+         <li 
+      class="nav-item has-treeview" [ngClass]=" bibliotecaMenu ? 'menu-open' : 'secondary'"  (click)="bibliotecaMenu = !bibliotecaMenu">
+        <a  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-pie-chart"></i>
+          <p>
+            Biblioteca Virtual
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item h-float">
+            <a [routerLink]="['/biblioteca/admin/form']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Agregar</p>
+            </a>
+          </li>
+          <li class="nav-item h-float">
+            <a [routerLink]="['/biblioteca/admin/list']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon"></i>
+              <p>Listado</p>
+            </a>
+          </li>
+
+      
+
+         
+       
+        </ul>
+      </li>
+
+
+      <li class="nav-item has-treeview" [ngClass]=" centrosaludMenu ? 'menu-open' : 'secondary'"  (click)="centrosaludMenu = !centrosaludMenu">
+        <a  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-pie-chart"></i>
+          <p>
+            Centro Salud
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+
+          
+          <li class="nav-item h-float">
+            <a [routerLink]="['/centrosalud/admin/form']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Agregar</p>
+            </a>
+          </li>
+          
+          <li class="nav-item h-float">
+            <a [routerLink]="['/centrosalud/estadal/list', estadalusuario]" class="nav-link">
+              <i class="fa fa-circle-o nav-icon"></i>
+              <p>Listado</p>
+            </a>
+          </li>
+       
+        </ul>
+      </li>
+
+
+
+
+     
+      <li 
+      class="nav-item has-treeview" [ngClass]=" inventarioMenu ? 'menu-open' : 'secondary'"  (click)="inventarioMenu = !inventarioMenu">
+        <a  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-pie-chart"></i>
+          <p>
+            Inventario
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item h-float">
+            <a [routerLink]="['/estadal/buscar/inventario/form']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Buscar</p>
+            </a>
+          </li>
+
+          <li class="nav-item h-float">
+            <a [routerLink]="['/inventario/admin/form']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Agregar</p>
+            </a>
+          </li>
+
+          <li class="nav-item h-float">
+            <a [routerLink]="['/inventario/estadal/nooperativos']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Listados No Operativos</p>
+            </a>
+          </li>
+          
+          
+
+       
+        </ul>
+      </li>
+
+      <li class="nav-item h-shake">
+        <a [routerLink]="['/usuarios/estadal/contrasena', idusuario ]"  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Editar Usuario</p>
+        </a>
+      </li>
+
+
+      
+
+    
+      <li class="nav-item h-shake">
+        <a [routerLink]="['/reportes/estadal/general']"  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Reportes</p>
+        </a>
+      </li>
+
+
+      
+
+       <li class="nav-item h-shake">
+        <a  class="nav-link"  data-widget="pushmenu" href="#">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Cerrar Menu</p>
+        </a>
+      </li>
+   
+   
+      
+     
+     
+    
+     
+     
+      <li class="nav-item h-shake">
+        <a (click)="logout()"  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Cerrar Sesión</p>
+        </a>
+      </li>
+    </ul>
+  </nav>

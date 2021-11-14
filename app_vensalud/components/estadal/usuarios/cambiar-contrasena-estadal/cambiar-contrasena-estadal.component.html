@@ -1,0 +1,156 @@
+<div class="wrapper">
+
+    <!-- Navbar -->
+   <app-navbar></app-navbar>
+    <!-- /.navbar -->
+  
+    <!-- Main Sidebar Container -->
+  <app-sidebar></app-sidebar>
+  
+    <!-- Content Wrapper. Contains page content -->
+    
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+               
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a [routerLink]="['/usuario/list']">Usuarios</a></li>
+                  <li class="breadcrumb-item active">Agregar</li>
+                </ol>
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+
+          <div class="container-fluid">
+            <div class="row">
+              <!-- left column -->
+
+              <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Agregar Usuario</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                 
+                <form role="form" [formGroup]="Form">
+                  <div class="card-body">
+
+                    <div class="form-row">
+
+                      <div class="form-group col-md-6">
+                        <label >Nombre Usuario</label>
+                        <input type="text" class="form-control"  placeholder="Correo Electronico."
+                        [ngClass]=" Form.controls['name'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                        formControlName="name" [(ngModel)]="usuario.name"
+                        >
+                       
+                        <div class="invalid-feedback"
+                        *ngIf="Form.controls['name'].touched && 
+                         Form.controls['name'].errors?.required"   >
+                            Nombre Usuario es Obligatorio...
+                        </div>
+                     </div>
+
+                     <div class="form-group col-md-6">
+                      <label >Correo Electronico</label>
+                      <input type="email" class="form-control"  placeholder="Correo Electronico."
+                      [ngClass]=" Form.controls['email'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                      formControlName="email" [(ngModel)]="usuario.email"
+                      >
+                     
+                      <div class="invalid-feedback"
+                      *ngIf="Form.controls['email'].touched && 
+                       Form.controls['email'].errors?.required"   >
+                          Correo Electronico es Obligatorio...
+                      </div>
+
+                   </div>
+                    </div>
+
+                   
+
+
+                    <div class="form-row">
+                      
+                      <div class="form-group col-md-10">
+                        <label>Contraseña</label>
+                        <input type="password" class="form-control"  placeholder="Contraseña."
+                        [ngClass]=" Form.controls['password'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                        formControlName="password" [(ngModel)]="usuario.password"
+                        >
+                       
+                        <div class="invalid-feedback"
+                        *ngIf="Form.controls['password'].touched && 
+                         Form.controls['password'].errors?.required"   >
+                            Contraseña es Obligatorio...
+                        </div>
+
+                     </div>
+                    </div>
+
+
+                
+
+
+               
+                  
+
+              
+
+                  
+                  
+                   
+                    
+                    </div>
+                    <!-- /.card-body -->
+    
+                    <div class="card-footer">
+                    
+                      <button type="submit" class="btn btn-danger" (click)="ActualizarUsuario()">Actualizar</button>
+                    </div>
+                  </form>
+                </div>
+                <!-- /.card -->
+    
+                          
+    
+              
+    
+              </div>
+              <!--/.col (left) -->
+
+
+              <!-- right column -->
+             
+              <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+
+
+
+
+    <!-- /.content-wrapper -->
+    <app-footer></app-footer>
+  
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>

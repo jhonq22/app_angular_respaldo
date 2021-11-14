@@ -1,0 +1,171 @@
+  <div id="wrapper">
+
+        <!-- Top Bar Start -->
+       <app-sidebar></app-sidebar>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+      <app-menu-admin></app-menu-admin>
+        <!-- Left Sidebar End -->
+
+       <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+               
+
+               <div class="container-fluid">
+                    <div class="page-title-box">
+
+                        <div class="row align-items-center ">
+                            <div class="col-md-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Formulario de Tipo de Vacunas</h4>
+                                  
+                                </div>
+                            </div>
+
+                         
+                        </div>
+                    </div>
+                    <!-- end page-title -->
+
+
+                                     
+
+
+
+                    <form role="form" [formGroup]="Form">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+
+                                 
+
+                                      <div class="form-group row" >
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Nombre de Vacuna</label>
+                                      <div class="col-sm-10">
+                                         <input type="text"  class="form-control"  placeholder="Ingresar Nombre de Vacuna"
+                                            [ngClass]=" Form.controls['nombre_vacuna'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                            formControlName="nombre_vacuna" [(ngModel)]="tipovacunas.nombre_vacuna"
+                                            >
+                                          
+                                            <div class="invalid-feedback"
+                                            *ngIf="Form.controls['nombre_vacuna'].touched && 
+                                            Form.controls['nombre_vacuna'].errors?.required"   >
+                                              Nombre de Vacuna es Obligatorio...
+                                            </div>
+
+                                         
+
+
+                                      </div>
+                                    </div>
+                                                           
+                
+
+
+
+
+
+
+
+
+
+                                
+
+
+                                  
+
+
+
+
+
+
+
+
+
+
+
+
+                                   
+                               
+                                  
+
+
+
+
+
+
+                                  
+                                  
+
+                                   
+                                
+
+                                <button type="submit" style="margin-left:450px; margin-top:40px" *ngIf="!edit" class="btn btn-primary btn-lg" (click)="GuardarTipoVacunas()">Guardar</button>
+                                <button type="submit" style="margin-left:450px; margin-top:40px" *ngIf="edit" class="btn btn-primary btn-lg" (click)="ActualizarTiposVacunas()">Actualizar</button>
+
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                        <!-- end col -->
+
+                        
+                    </div>
+                    <!-- end row -->
+
+
+
+
+
+
+
+
+
+
+                    </form>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- container-fluid -->
+
+            </div>
+            <!-- content -->
+
+            <footer class="footer">
+              
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>

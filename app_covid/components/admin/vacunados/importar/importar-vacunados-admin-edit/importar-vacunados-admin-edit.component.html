@@ -1,0 +1,138 @@
+  <div id="wrapper">
+
+        <!-- Top Bar Start -->
+       <app-sidebar></app-sidebar>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+      <app-menu-general></app-menu-general>
+        <!-- Left Sidebar End -->
+
+       <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+               
+
+               <div class="container-fluid">
+                    <div class="page-title-box">
+
+                        <div class="row align-items-center ">
+                            <div class="col-md-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Actualizar Estatus</h4>
+                                  
+                                </div>
+                            </div>
+
+                         
+                        </div>
+                    </div>
+                    <!-- end page-title -->
+
+
+
+
+
+
+                    <form role="form" [formGroup]="Form">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                               <div class="form-group row">
+                                    
+                                   <label for="example-text-input" class="col-sm-2 col-form-label">Estatus</label>
+                                      <div class="col-sm-10">
+                                          <select type="text"  class="form-control" placeholder="Ingresar "
+                                      [ngClass]=" Form.controls['estatu_convocado_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                       formControlName="estatu_convocado_id" [(ngModel)]="vacunas.estatu_convocado_id">
+                    
+                                       <option *ngFor="let tipovacuna of estatus" value="{{tipovacuna.id}}">{{tipovacuna.nombre_estatus}}</option>
+                                    </select>
+
+                                    <div class="invalid-feedback"
+                                    *ngIf="Form.controls['estatu_convocado_id'].touched && 
+                                    Form.controls['estatu_convocado_id'].errors?.required"   >
+                                        Estatus  es Obligatorio...
+                                    </div>
+                                      </div>
+
+
+
+
+
+                                  
+                                    </div>
+                                                      
+                               
+                                
+
+
+                                <button type="submit" style="margin-left:450px; margin-top:40px" [disabled]="Form.invalid" *ngIf="edit" class="btn btn-primary btn-lg" (click)="Actualizar()">Actualizar</button>
+                             
+                            
+                                
+
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                        <!-- end col -->
+
+                        
+                    </div>
+                    <!-- end row -->
+
+
+
+
+
+
+
+
+
+
+                    </form>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- container-fluid -->
+
+            </div>
+            <!-- content -->
+
+            <footer class="footer">
+              
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>

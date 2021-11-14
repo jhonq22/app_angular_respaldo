@@ -1,0 +1,41 @@
+	<div class="container-login100" style="">
+		
+        
+        
+        <div class="wrap-login100 p-l-55 p-r-55 p-t-80 p-b-30 animate__animated animate__backInLeft">
+<img src="assets/images/logo.png" style="height:160px; margin-left:65px; margin-bottom:10px" >
+			<form class="login100-form validate-form" (submit)="login()">
+				<span class="login100-form-title p-b-37 ">
+						
+					Inicio Sesión
+				</span>
+
+				<div class="wrap-input100 validate-input m-b-20" data-validate="Enter username or email">
+					  <input type="text" class="input100" name="email" placeholder="Ingresar Correo Electrónico." [(ngModel)]="credentials.email">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input m-b-25" data-validate = "Enter password">
+					<input type="password" class="input100" name="password" [(ngModel)]="credentials.password" placeholder="Ingresar Contraseña.">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="container-login100-form-btn mt-5 ">
+					<button class="login100-form-btn" type="submit">
+						Iniciar Sesión
+					</button>
+				</div>
+
+               
+
+				<div class="text-center p-t-57 p-b-20 mt-5">
+				
+				</div>
+
+			
+		
+			</form>
+
+			
+		</div>
+	</div>

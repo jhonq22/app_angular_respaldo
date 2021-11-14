@@ -1,0 +1,124 @@
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+     
+
+
+
+
+      <li class="nav-item h-shake">
+        <a [routerLink]="['/inicio']"  href="javascript:void(0)" class="nav-link">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Inicio</p>
+        </a>
+      </li>
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+      <li 
+      class="nav-item has-treeview" [ngClass]=" respuestoMenu ? 'menu-open' : 'secondary'"  (click)="respuestoMenu = !respuestoMenu">
+        <a  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-pie-chart"></i>
+          <p>
+            Repuestos
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item h-float">
+            <a [routerLink]="['/respuestos/admin/form']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Agregar</p>
+            </a>
+          </li>
+          <li class="nav-item h-float">
+            <a [routerLink]="['/respuestos/admin/list']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon"></i>
+              <p>Listado</p>
+            </a>
+          </li>
+
+          <li class="nav-item h-float">
+            <a [routerLink]="['/repuestos/solicitados']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon"></i>
+              <p>Solicitud de Repuestos</p>
+            </a>
+          </li>
+
+         
+       
+        </ul>
+      </li>
+
+
+
+
+
+     
+ 
+
+
+      
+
+    
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+   
+      
+     
+      
+      <li class="nav-item h-shake">
+        <a [routerLink]="['/inventario/reportes/admin/general']"  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Reportes</p>
+        </a>
+      </li>
+
+      <li class="nav-item h-shake">
+        <a [routerLink]="['/repuestos/solicitados/reportes']"  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Reporte Repuestos</p>
+        </a>
+      </li>
+      
+      
+     
+      <li class="nav-item h-shake">
+        <a  class="nav-link"  data-widget="pushmenu" href="#">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Cerrar Menu</p>
+        </a>
+      </li>
+    
+     
+     
+      <li class="nav-item h-shake">
+        <a (click)="logout()"  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Cerrar Sesión</p>
+        </a>
+      </li>
+    </ul>
+  </nav>

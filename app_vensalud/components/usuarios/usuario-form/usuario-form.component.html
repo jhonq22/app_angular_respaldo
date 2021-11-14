@@ -1,0 +1,255 @@
+<div class="wrapper">
+
+    <!-- Navbar -->
+   <app-navbar></app-navbar>
+    <!-- /.navbar -->
+  
+    <!-- Main Sidebar Container -->
+  <app-sidebar></app-sidebar>
+  
+    <!-- Content Wrapper. Contains page content -->
+    
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+               
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a [routerLink]="['/usuario/list']">Usuarios</a></li>
+                  <li class="breadcrumb-item active">Agregar</li>
+                </ol>
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+
+          <div class="container-fluid">
+            <div class="row">
+              <!-- left column -->
+
+              <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Agregar Usuario</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                 
+                <form role="form" [formGroup]="Form">
+                  <div class="card-body">
+
+                    <div class="form-row">
+
+                      <div class="form-group col-md-6">
+                        <label >Nombre Usuario</label>
+                        <input type="text" class="form-control"  placeholder="Correo Electronico."
+                        [ngClass]=" Form.controls['name'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                        formControlName="name" [(ngModel)]="usuario.name"
+                        >
+                       
+                        <div class="invalid-feedback"
+                        *ngIf="Form.controls['name'].touched && 
+                         Form.controls['name'].errors?.required"   >
+                            Nombre Usuario es Obligatorio...
+                        </div>
+                     </div>
+
+                     <div class="form-group col-md-6">
+                      <label >Correo Electronico</label>
+                      <input type="email" class="form-control"  placeholder="Correo Electronico."
+                      [ngClass]=" Form.controls['email'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                      formControlName="email" [(ngModel)]="usuario.email"
+                      >
+                     
+                      <div class="invalid-feedback"
+                      *ngIf="Form.controls['email'].touched && 
+                       Form.controls['email'].errors?.required"   >
+                          Correo Electronico es Obligatorio...
+                      </div>
+
+                   </div>
+                    </div>
+
+                   
+
+
+                    <div class="form-row">
+                      
+                      <div class="form-group col-md-10">
+                        <label>Contraseña</label>
+                        <input type="password" class="form-control"  placeholder="Contraseña."
+                        [ngClass]=" Form.controls['password'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                        formControlName="password" [(ngModel)]="usuario.password"
+                        >
+                       
+                        <div class="invalid-feedback"
+                        *ngIf="Form.controls['password'].touched && 
+                         Form.controls['password'].errors?.required"   >
+                            Contraseña es Obligatorio...
+                        </div>
+
+                     </div>
+                    </div>
+
+
+                    <div class="form-row">
+                      
+                      <div class="form-group col-md-12">
+                        <label>Ente</label>
+                        <select type="text" class="form-control" placeholder="Ingresar "
+                     [ngClass]=" Form.controls['ente_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                      formControlName="ente_id" [(ngModel)]="usuario.ente_id"           
+                      >
+                    
+                      <option *ngFor="let ente of entes" value="{{ente.id}}">{{ente.ente}}</option>
+                    </select>
+                       
+                        <div class="invalid-feedback"
+                        *ngIf="Form.controls['ente_id'].touched && 
+                         Form.controls['ente_id'].errors?.required"   >
+                            Ente es Obligatorio...
+                        </div>
+
+                     </div>
+                    </div>
+
+
+                    <div class="form-row">
+                      
+                      <div class="form-group col-md-12">
+                        <label>Rol</label>
+                        <select type="text" class="form-control" placeholder="Ingresar Rol "
+                     [ngClass]=" Form.controls['rol_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                      formControlName="rol_id" [(ngModel)]="usuario.rol_id"           
+                      >
+                    
+                      <option value="1">Administrador</option>
+                      <option value="2">Estadal</option>
+                      <option value="3">Local</option>
+                      <option value="4">Taller Nacional</option>
+                      <option value="5">Vigilancia Tecnologica</option>
+                      <option value="6">Visor General</option>
+                    </select>
+                       
+                        <div class="invalid-feedback"
+                        *ngIf="Form.controls['rol_id'].touched && 
+                         Form.controls['rol_id'].errors?.required"   >
+                            Rol es Obligatorio...
+                        </div>
+
+                     </div>
+                    </div>
+                  
+
+                    <div class="form-row">
+
+                      <div class="form-group col-md-6">
+                        <label >Estado:</label>
+                        <select type="text" class="form-control" placeholder="Ingresar"
+                        [ngClass]=" Form.controls['estado_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                         formControlName="estado_id" [(ngModel)]="usuario.estado_id"  (change)="getMunicipios($event.target.value)"         
+                         >
+                       
+                       <option *ngFor="let estado of estados" value="{{estado.id}}">{{estado.estado}}</option>
+                       </select>
+                       
+                       <div class="invalid-feedback"
+                       *ngIf="Form.controls['estado_id'].touched && 
+                        Form.controls['estado_id'].errors?.required" >
+                           Estado es Obligatorio...
+                       </div>
+                     </div>
+
+
+
+                     <div class="form-group col-md-6">
+                      <label >Municipio:</label>
+                       <select type="text" class="form-control" placeholder="Ingresar "
+                     [ngClass]=" Form.controls['municipio_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                      formControlName="municipio_id" [(ngModel)]="usuario.municipio_id" (change)="getCentroSalud($event.target.value)"          
+                      >
+                    
+                      <option *ngFor="let municipio of municipios" value="{{municipio.id}}">{{municipio.municipio}}</option>
+                    </select>
+
+                    <div class="invalid-feedback"
+                    *ngIf="Form.controls['municipio_id'].touched && 
+                     Form.controls['municipio_id'].errors?.required"   >
+                        Municipio es Obligatorio...
+                    </div>
+
+                   </div>
+                    </div>
+
+                    <div class="form-row">
+                      
+                      <div class="form-group col-md-12">
+                        <label>Centro Salud</label>
+                        <select type="text" class="form-control" placeholder="Ingresar Centro de Salud"
+                         [ngClass]=" Form.controls['centro_salud_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                         formControlName="centro_salud_id" [(ngModel)]="usuario.centro_salud_id"           
+                        >
+                    
+                      <option *ngFor="let centrossalud of centrosalud" value="{{centrossalud.id}}">{{centrossalud.centro_salud}}</option>
+                    </select>
+
+                            <div class="invalid-feedback"
+                            *ngIf="Form.controls['centro_salud_id'].touched && 
+                            Form.controls['centro_salud_id'].errors?.required"   >
+                                Centro de Salud es Obligatorio...
+                            </div>
+                     </div>
+                 </div>
+                  
+                   
+                    
+                    </div>
+                    <!-- /.card-body -->
+    
+                    <div class="card-footer">
+                      <button type="submit" *ngIf="!edit" class="btn btn-primary" (click)="GuardarUsuario()">Guardar</button>
+                      <button type="submit" *ngIf="edit" class="btn btn-danger" (click)="ActualizarUsuario()">Actualizar</button>
+                    </div>
+                  </form>
+                </div>
+                <!-- /.card -->
+    
+                          
+    
+              
+    
+              </div>
+              <!--/.col (left) -->
+
+
+              <!-- right column -->
+             
+              <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+
+
+
+
+    <!-- /.content-wrapper -->
+    <app-footer></app-footer>
+  
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>

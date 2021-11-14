@@ -1,0 +1,267 @@
+  <div id="wrapper">
+
+        <!-- Top Bar Start -->
+       <app-sidebar></app-sidebar>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+      <app-menu-general></app-menu-general>
+        <!-- Left Sidebar End -->
+
+       <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+               
+
+               <div class="container-fluid">
+                    <div class="page-title-box">
+
+                        <div class="row align-items-center ">
+                            <div class="col-md-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Formulario de Centro de Salud</h4>
+                                  
+                                </div>
+                            </div>
+
+                         
+                        </div>
+                    </div>
+                    <!-- end page-title -->
+
+
+                                     
+
+
+
+                    <form role="form" [formGroup]="Form">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+
+                                    <div class="form-group row" >
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Centro Salud</label>
+                                      <div class="col-sm-10">
+                                         <input type="text"  class="form-control"  placeholder="Ingresar Centro de Salud"
+                                            [ngClass]=" Form.controls['centro_salud'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                            formControlName="centro_salud" [(ngModel)]="centrosalud.centro_salud"
+                                            >
+                                          
+                                            <div class="invalid-feedback"
+                                            *ngIf="Form.controls['centro_salud'].touched && 
+                                            Form.controls['centro_salud'].errors?.required"   >
+                                              Centro de Salud es Obligatorio...
+                                            </div>
+
+                                         
+
+
+                                      </div>
+                                    </div>
+
+
+                                      <div class="form-group row" >
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Código SICM</label>
+                                      <div class="col-sm-10">
+                                         <input type="text"  class="form-control"  placeholder="Ingresar Centro de Salud"
+                                            [ngClass]=" Form.controls['codigo_sicm'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                            formControlName="codigo_sicm" [(ngModel)]="centrosalud.codigo_sicm"
+                                            >
+                                          
+                                            <div class="invalid-feedback"
+                                            *ngIf="Form.controls['codigo_sicm'].touched && 
+                                            Form.controls['codigo_sicm'].errors?.required"   >
+                                              Código SICM es Obligatorio...
+                                            </div>
+
+                                         
+
+
+                                      </div>
+                                    </div>
+                                   
+
+
+                                     <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Teléfono </label>
+                                      <div class="col-sm-10">
+                                         <input type="text"  class="form-control"  placeholder="Ingresar Telefono de Centro Salud"
+                                          [ngClass]=" Form.controls['contacto_tlf'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                          formControlName="contacto_tlf" [(ngModel)]="centrosalud.contacto_tlf" >
+                                        
+                                          
+                                      </div>
+                                    </div>
+                                                              
+
+                                    
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Estados</label>
+                                      <div class="col-sm-10">
+                                       <select type="text"  class="form-control" placeholder="Ingresar"
+                                        [ngClass]=" Form.controls['estado_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                        formControlName="estado_id" [(ngModel)]="centrosalud.estado_id"  (change)="getMunicipios($event.target.value)">
+                       
+                                        <option *ngFor="let estado of estados" value="{{estado.id}}">{{estado.estado}}</option>
+                                       </select>
+                                   <div class="invalid-feedback"
+                                    *ngIf="Form.controls['estado_id'].touched && 
+                                      Form.controls['estado_id'].errors?.required" >
+                                        Estado es Obligatorio...
+                                  </div>
+                                </div>
+                               </div>
+
+
+
+
+
+
+
+                              
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Municipios</label>
+                                      <div class="col-sm-10">
+                                      <select type="text"  class="form-control" placeholder="Ingresar "
+                                      [ngClass]=" Form.controls['municipio_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                       formControlName="municipio_id" [(ngModel)]="centrosalud.municipio_id">
+                    
+                                      <option *ngFor="let municipio of municipios" value="{{municipio.id}}">{{municipio.municipio}}</option>
+                                    </select>
+
+                                    <div class="invalid-feedback"
+                                    *ngIf="Form.controls['municipio_id'].touched && 
+                                    Form.controls['municipio_id'].errors?.required"   >
+                                        Municipio es Obligatorio...
+                                    </div>
+                                </div>
+                              </div>
+
+
+                               <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Dirección</label>
+                                      <div class="col-sm-10">
+                                     <textarea type="text"  class="form-control" placeholder="Ingresar Dirección "
+                                      [ngClass]=" Form.controls['direccion'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                      formControlName="direccion" [(ngModel)]="centrosalud.direccion">
+                                      </textarea>
+
+                                    <div class="invalid-feedback"
+                                    *ngIf="Form.controls['direccion'].touched && 
+                                    Form.controls['direccion'].errors?.required"   >
+                                        Dirección es Obligatorio...
+                                    </div>
+                                </div>
+                              </div>
+                                 
+
+
+                          
+                
+
+
+
+
+
+
+
+
+
+                                
+
+
+                                  
+
+
+
+
+
+
+
+
+
+
+
+
+                                   
+                               
+                                  
+
+
+
+
+
+
+                                  
+                                  
+
+                                   
+                                
+
+                                <button type="submit" style="margin-left:450px; margin-top:40px" *ngIf="!edit" class="btn btn-primary btn-lg" (click)="GuardarCentroSalud()">Guardar</button>
+                                <button type="submit" style="margin-left:450px; margin-top:40px" *ngIf="edit" class="btn btn-primary btn-lg" (click)="ActualizarCentroSalud()">Actualizar</button>
+
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                        <!-- end col -->
+
+                        
+                    </div>
+                    <!-- end row -->
+
+
+
+
+
+
+
+
+
+
+                    </form>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- container-fluid -->
+
+            </div>
+            <!-- content -->
+
+            <footer class="footer">
+              
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>

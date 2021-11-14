@@ -1,0 +1,280 @@
+  <div id="wrapper">
+
+        <!-- Top Bar Start -->
+       <app-sidebar></app-sidebar>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+      <app-menu-general></app-menu-general>
+        <!-- Left Sidebar End -->
+
+       <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+               
+
+               <div class="container-fluid">
+                    <div class="page-title-box">
+
+                        <div class="row align-items-center ">
+                            <div class="col-md-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Reportes General</h4>
+                                  
+                                </div>
+                            </div>
+
+                         
+                        </div>
+                    </div>
+                    <!-- end page-title -->
+
+
+
+
+
+         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Reportes Estadal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Reportes Por Fechas</a>
+                </li>
+             
+         </ul>
+<div class="tab-content" id="pills-tabContent">
+
+ <!-- Formulario 1-->
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+  
+        <form role="form" [formGroup]="Form">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                           
+                                    
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Estados</label>
+                                      <div class="col-sm-10">
+                                       <select type="text" class="form-control" placeholder="Ingresar"
+                                        [ngClass]=" Form.controls['estado_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                        formControlName="estado_id" [(ngModel)]="estado_id" (blur)="reporteVacunasEdadEstado()">
+                       
+                                        <option *ngFor="let estado of estados" value="{{estado.id}}">{{estado.estado}}</option>
+                                       </select>
+                                   <div class="invalid-feedback"
+                                    *ngIf="Form.controls['estado_id'].touched && 
+                                      Form.controls['estado_id'].errors?.required" >
+                                        Estado es Obligatorio...
+                                  </div>
+                                </div>
+                               </div>
+
+                             </div>
+                            </div>
+
+                            
+                
+                        
+                        </div>
+                        <!-- end col -->
+                     
+                    </div>
+                    <!-- end row -->
+
+
+                  </form>
+
+                         <div> PDF:     
+                   <button class="btn btn-warning m-3" (click)="PDFGeneral()">Reporte PDF General Por Edad </button>
+                   <button class="btn btn-warning m-3" *ngIf="pdfEstadal" (click)="PDFEstadalEdad()">Reporte PDF Estadal Por Edad </button>
+                   </div>
+
+
+                     <div> Excel:     
+                   <button class="btn btn-success m-3" (click)="excelVacunasPorEdadGeneral()">Reporte Excel General Por Edad </button>
+                   <button class="btn btn-success m-3" *ngIf="pdfEstadal" (click)="excelVacunasPorEdadEstadal()">Reporte PDF Estadal Por Edad </button>
+                   </div>
+
+
+
+
+  
+  </div>
+
+   <!-- termina Formulario 1-->
+
+
+   <!-- Aqui empieza el formulario 2 -->
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+
+   <form role="form" [formGroup]="Form2">
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                           
+                                    
+                                
+
+     <p class="text-warning">*Para visualizar este reporte es obligatorio, ingresar las fechas.</p>
+
+                                      <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Fecha Desde</label>
+                                     
+                                     
+                                      <div class="col-sm-5">
+                                        <input type="date" id="example-date-input" min="2021-02-12" class="form-control"  placeholder="Ingresar fecha nacimiento"
+                                            [ngClass]=" Form2.controls['fecha1'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                            formControlName="fecha1" [(ngModel)]="fecha1"
+                                            >                                        
+                                                                                                       
+                                            <div class="invalid-feedback"
+                                            *ngIf="Form2.controls['fecha1'].touched && 
+                                            Form2.controls['fecha1'].errors?.required"   >
+                                              Fecha Desde es Obligatorio...
+                                            </div>
+                                      </div>
+                                    </div>
+                                   
+
+                                   
+                                      <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Fecha Hasta</label>
+                                     
+                                     
+                                      <div class="col-sm-5">
+                                        <input type="date" id="example-date-input" min="2021-02-12" class="form-control"  placeholder="Ingresar fecha nacimiento"
+                                            [ngClass]=" Form2.controls['fecha2'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                            formControlName="fecha2" [(ngModel)]="fecha2" (blur)="getReporteVacunasDosis1Fechas()"
+                                            >                                        
+                                                                                                       
+                                            <div class="invalid-feedback"
+                                            *ngIf="Form2.controls['fecha2'].touched && 
+                                            Form2.controls['fecha2'].errors?.required"   >
+                                              Fecha Hasta es Obligatorio...
+                                            </div>
+                                      </div>
+                                    </div>
+                                   
+
+
+
+
+                                 <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Estados</label>
+                                      <div class="col-sm-5">
+                                       <select type="text" class="form-control" placeholder="Ingresar"
+                                        [ngClass]=" Form2.controls['estado_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                        formControlName="estado_id" [(ngModel)]="estado_id" (blur)="getReporteVacunasDosis1FechasEstadal()">
+                       
+                                        <option *ngFor="let estado of estados" value="{{estado.id}}">{{estado.estado}}</option>
+                                       </select>
+                                   <div class="invalid-feedback"
+                                    *ngIf="Form2.controls['estado_id'].touched && 
+                                      Form2.controls['estado_id'].errors?.required" >
+                                        Estado es Obligatorio...
+                                  </div>
+                                </div>
+                               </div>
+
+
+
+
+
+
+
+                             </div>
+                            </div>
+
+                            
+                
+                        
+                        </div>
+                        <!-- end col -->
+                     
+                    </div>
+                    <!-- end row -->
+
+
+                  </form>
+
+                         <div> PDF:     
+                   <button class="btn btn-warning m-3" *ngIf="pdfDosis1" (click)="PDFGeneralDosis1Fechas()">Reporte PDF Por Fechas General </button>
+                     <button class="btn btn-warning m-3" *ngIf="pdfEstadal" (click)="PDFGeneralDosis1FechasEstadal()">Reporte PDF Por Fechas Estadal </button>
+              
+                   </div>
+
+
+                     <div> Excel:     
+                   <button class="btn btn-success m-3" *ngIf="pdfDosis1" (click)="excelVacunasDosis1PorFechas()">Reporte Excel Por Fechas General </button>
+                   <button class="btn btn-success m-3" *ngIf="pdfEstadal" (click)="excelVacunasDosis1PorEstadal()">Reporte Excel Por Estadal </button>
+                
+                   </div>
+
+
+
+
+
+  
+  
+  </div>
+
+
+  <!-- Aqui termina el formulario 2-->
+  
+</div>
+
+
+
+
+
+
+
+                 
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- container-fluid -->
+
+            </div>
+
+            <!-- content -->
+
+            <footer class="footer">
+              
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>

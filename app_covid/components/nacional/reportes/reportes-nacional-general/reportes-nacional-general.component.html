@@ -1,0 +1,263 @@
+
+  <div id="wrapper">
+
+        <!-- Top Bar Start -->
+       <app-sidebar></app-sidebar>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+      <app-menu-general></app-menu-general>
+        <!-- Left Sidebar End -->
+
+       <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+               
+
+               <div class="container-fluid">
+                    <div class="page-title-box">
+
+                        <div class="row align-items-center ">
+                            <div class="col-md-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Reportes Consolidados Del Proceso Vacunación</h4>
+                                  
+                                </div>
+                            </div>
+
+                         
+                        </div>
+                    </div>
+                    <!-- end page-title -->
+
+
+
+
+                          <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="mt-0 header-title">Reportes Consolidados Del Proceso Vacunación</h4>
+                         
+                                  
+
+                                    <div class="form-group row mt-5">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Tipo de Vacuna</label>
+                                      <div class="col-sm-6">
+                                          <select type="text" class="form-control" placeholder="Ingresar "
+                                      [(ngModel)]="tipo_vacuna_id" name="tipo_vacuna_id" (blur)="EntrarComboList()">
+                    
+                                       <option *ngFor="let tipovacuna of tipovacunas" value="{{tipovacuna.id}}">{{tipovacuna.nombre_vacuna}}</option>
+                                    </select>
+                                 
+                                      </div>
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    
+
+                                    <div class="table-rep-plugin">
+                                        <div class="table-responsive b-0" data-pattern="priority-columns">
+                                            <table id="tech-companies-1" class="table  table-striped">
+                                                <thead>
+                                        
+
+
+                                    <tr *ngIf="comboTipoVacuna">
+                                       <th data-priority="1"> Reporte Especial Por Vacuna Individual </th>
+                                       <th> 
+                                          <a class="ml-5 mb-4"><img (click)="PDFespecialReporteTotalVacunadosWhere()" class="h-rotate-360" src="assets/iconos/pdf.png"></a> 
+                                          
+                                       </th>
+                                         </tr>
+
+
+
+                                     <tr>
+                                       <th data-priority="1"> Reporte Especial de Vacunación General:</th>
+                                       <th> 
+                                          <a class="ml-5 mb-4"><img (click)="PDFespecialReporteTotalVacunados()" class="h-rotate-360" src="assets/iconos/pdf.png"></a> 
+                                          
+                                       </th>
+                                         </tr>
+
+
+                          
+
+
+
+                                           <tr>
+                                       <th data-priority="1"> Reporte Total de Dosis:</th>
+                                       <th> 
+                                          <a class="ml-5 mb-4"><img (click)="PDFVacunasTotalDosis()" class="h-rotate-360" src="assets/iconos/pdf.png"></a> 
+                                          <a class="ml-5 "><img (click)="excelVacunasTotalDosis()" class="h-rotate-360" src="assets/iconos/excel.png"></a>
+                                       </th>
+                                         </tr>
+
+
+
+                                            <tr>
+                                       <th data-priority="1"> Reporte de No Vacunados con 2da Dosis:</th>
+                                       <th> 
+                                          <a class="ml-5 mb-4"><img (click)="PDFNo2Dosis()" class="h-rotate-360" src="assets/iconos/pdf.png"></a>
+                                           <a class="ml-5 "><img (click)="excelNo2Dosis()" class="h-rotate-360" src="assets/iconos/excel.png"></a> 
+                                          
+                                       </th>
+                                         </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          <tr>
+                                       <th data-priority="1">Reporte Total de Dosis de Sexo: </th>
+                                       <th> 
+                                          <a class="ml-5 mb-4"><img (click)="PDFVacunasTotalDosisSexo()" class="h-rotate-360" src="assets/iconos/pdf.png"></a> 
+                                          <a class="ml-5 "><img (click)="excelVacunasTotalDosisSexo()" class="h-rotate-360" src="assets/iconos/excel.png"></a>
+                                       </th>
+                                         </tr>
+
+
+                                           <tr>
+                                       <th data-priority="1">Reporte Total de Dosis de Grupo Especiales:</th>
+                                       <th> 
+                                          <a class="ml-5 mb-4"><img (click)="PDFVacunasTotalDosisGrupoEspeciales()" class="h-rotate-360" src="assets/iconos/pdf.png"></a> 
+                                          <a class="ml-5 "><img (click)="excelVacunasTotalDosisGrupoEspeciales()" class="h-rotate-360" src="assets/iconos/excel.png"></a>
+                                       </th>
+                                         </tr>
+
+
+                                           <tr>
+                                       <th data-priority="1">Reporte Total de Dosis de Etnias: </th>
+                                       <th> 
+                                          <a class="ml-5 mb-4"><img (click)="PDFVacunasTotalDosisEtnias()" class="h-rotate-360" src="assets/iconos/pdf.png"></a> 
+                                          <a class="ml-5 "><img (click)="excelVacunasTotalDosisEtnias()" class="h-rotate-360" src="assets/iconos/excel.png"></a>
+                                       </th>
+                                         </tr>
+
+
+                                           <tr>
+                                       <th data-priority="1">Reporte Total de Dosis de Pueblo Indigenas:</th>
+                                       <th> 
+                                          <a class="ml-5 mb-4"><img (click)="PDFVacunasTotalDosisIndigenas()" class="h-rotate-360" src="assets/iconos/pdf.png"></a> 
+                                          <a class="ml-5 "><img  (click)="excelVacunasTotalDosisIndigenas()" class="h-rotate-360" src="assets/iconos/excel.png"></a>
+                                       </th>
+                                         </tr>
+
+
+                                           <tr>
+                                       <th data-priority="1">Reporte Vacunados Personal de Salud:</th>
+                                       <th> 
+                                           <a class="ml-5 mb-4"><img (click)="PDFVacunadosPersonalSalud()" class="h-rotate-360" src="assets/iconos/pdf.png"></a> 
+                                          <a class="ml-5 "><img  (click)="excelVacunasPersonalSalud()" class="h-rotate-360" src="assets/iconos/excel.png"></a>
+                                       </th>
+                                         </tr>
+
+                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                </thead>
+                                            
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                       
+                        </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- container-fluid -->
+
+            </div>
+            <!-- content -->
+
+            <footer class="footer">
+              
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>

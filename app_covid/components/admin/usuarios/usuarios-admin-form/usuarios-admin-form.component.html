@@ -1,0 +1,275 @@
+  <div id="wrapper">
+
+        <!-- Top Bar Start -->
+       <app-sidebar></app-sidebar>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+      <app-menu-general></app-menu-general>
+        <!-- Left Sidebar End -->
+
+       <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+               
+
+               <div class="container-fluid">
+                    <div class="page-title-box">
+
+                        <div class="row align-items-center ">
+                            <div class="col-md-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Formulario de Usuarios</h4>
+                              
+                                </div>
+                            </div>
+
+                         
+                        </div>
+                    </div>
+                    <!-- end page-title -->
+
+
+
+
+                                          
+
+
+
+                    <form role="form" [formGroup]="Form">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                
+                                
+                                 
+                                   
+
+
+
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Nombre Usuario</label>
+                                      <div class="col-sm-10">
+                                        <input type="text" class="form-control"  placeholder="Ingresar Nombre"
+                                          [ngClass]=" Form.controls['name'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                          formControlName="name" [(ngModel)]="usuario.name">
+                                        <div class="invalid-feedback"
+                                            *ngIf="Form.controls['name'].touched && 
+                                            Form.controls['name'].errors?.required"   >
+                                              Nombre es Obligatorio...
+                                        </div>
+                                      </div>
+                                    </div>
+
+
+                                    
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Correo Electronico</label>
+                                      <div class="col-sm-10">
+                                        <input type="text" class="form-control"  placeholder="Ingresar Correo Electronico"
+                                          [ngClass]=" Form.controls['email'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                          formControlName="email" [(ngModel)]="usuario.email">
+                                        <div class="invalid-feedback"
+                                            *ngIf="Form.controls['email'].touched && 
+                                            Form.controls['email'].errors?.required"   >
+                                              Correo Electronico es Obligatorio...
+                                        </div>
+
+
+                                         <div class="invalid-feedback"
+                                            *ngIf="Form.controls['email'].touched && 
+                                            Form.controls['email'].errors?.email"   >
+                                              Tiene que ser un Correo Electronico valido, por favor...
+                                        </div>
+
+
+                                        
+                                      </div>
+                                    </div>
+                                   
+
+
+                                     <div class="form-group row" *ngIf="!edit" >
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Contraseña</label>
+                                      <div class="col-sm-10">
+                                        <input type="password" class="form-control"  placeholder="Ingresar Contraseña"
+                                          [ngClass]=" Form.controls['password'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                          formControlName="password" >
+                                        <div class="invalid-feedback"
+                                            *ngIf="Form.controls['password'].touched && 
+                                            Form.controls['password'].errors?.required"   >
+                                              Contraseña es Obligatorio...
+                                        </div>
+                                           <p class="text-warning">Contraseña debe ser mayor a 5 caracteres...</p>
+
+                                                                             </div>
+                                    </div>
+
+                                   
+
+                                     <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Estados</label>
+                                      <div class="col-sm-10">
+                                       <select type="text"  class="form-control" placeholder="Ingresar"
+                                        [ngClass]=" Form.controls['estado_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                        formControlName="estado_id" [(ngModel)]="usuario.estado_id"  (change)="getMunicipios($event.target.value)">
+                       
+                                        <option *ngFor="let estado of estados" value="{{estado.id}}">{{estado.estado}}</option>
+                                       </select>
+                                   <div class="invalid-feedback"
+                                    *ngIf="Form.controls['estado_id'].touched && 
+                                      Form.controls['estado_id'].errors?.required" >
+                                        Estado es Obligatorio...
+                                  </div>
+                                </div>
+                               </div>
+
+
+
+
+
+
+
+                              
+                                <div class="form-group row" *ngIf="!edit" >
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Municipios</label>
+                                      <div class="col-sm-10">
+                                      <select type="text"  class="form-control" placeholder="Ingresar "
+                                      [ngClass]=" Form.controls['municipio_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                       formControlName="municipio_id" [(ngModel)]="usuario.municipio_id" (change)="getCentroSalud($event.target.value)">
+                    
+                                      <option *ngFor="let municipio of municipios" value="{{municipio.id}}">{{municipio.municipio}}</option>
+                                    </select>
+
+                                    <div class="invalid-feedback"
+                                    *ngIf="Form.controls['municipio_id'].touched && 
+                                    Form.controls['municipio_id'].errors?.required"   >
+                                        Municipio es Obligatorio...
+                                    </div>
+                                </div>
+                              </div>
+
+
+
+                               <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Centro Salud</label>
+                                      <div class="col-sm-10">
+                                      <select type="text"  class="form-control" placeholder="Ingresar "
+                                      [ngClass]=" Form.controls['centro_salud_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                       formControlName="centro_salud_id" [(ngModel)]="usuario.centro_salud_id">
+                    
+                                      <option *ngFor="let centrossalud of centrosalud" value="{{centrossalud.id}}">{{centrossalud.centro_salud}}</option>
+                                    </select>
+
+                                    <div class="invalid-feedback"
+                                    *ngIf="Form.controls['centro_salud_id'].touched && 
+                                    Form.controls['centro_salud_id'].errors?.required"   >
+                                        Centro de Salud es Obligatorio...
+                                    </div>
+                                </div>
+                              </div>
+
+
+
+
+                        
+
+
+
+
+
+
+
+                               <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Roles</label>
+                                      <div class="col-sm-10">
+                                      <select type="text"  class="form-control" placeholder="Ingresar "
+                                      [ngClass]=" Form.controls['rol_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                       formControlName="rol_id" [(ngModel)]="usuario.rol_id">
+                    
+                                       <option *ngFor="let rol of roles" value="{{rol.id}}">{{rol.rol}}</option>
+                                      
+                                    </select>
+
+                                    <div class="invalid-feedback"
+                                    *ngIf="Form.controls['rol_id'].touched && 
+                                    Form.controls['rol_id'].errors?.required"   >
+                                        Rol es Obligatorio...
+                                    </div>
+                                </div>
+                              </div>
+
+                                 
+                                 
+
+                                  
+                                  
+
+                                   
+                                
+
+                                <button type="submit" *ngIf="!edit" [disabled]="Form.invalid"  class="btn btn-primary" (click)="GuardarUsuario()">Guardar</button>
+                                <button type="submit" *ngIf="edit" [disabled]="Form.invalid" class="btn btn-primary" (click)="ActualizarUsuario()">Actualizar</button>
+                               
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                        <!-- end col -->
+
+                        
+                    </div>
+                    <!-- end row -->
+
+
+
+
+
+
+
+
+
+
+                    </form>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- container-fluid -->
+
+            </div>
+            <!-- content -->
+
+            <footer class="footer">
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>

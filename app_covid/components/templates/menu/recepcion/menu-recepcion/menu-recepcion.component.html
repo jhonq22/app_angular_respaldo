@@ -1,0 +1,79 @@
+  <div class="left side-menu">
+            <div class="slimscroll-menu" id="remove-scroll">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu" id="side-menu">
+                        <li class="menu-title">Menu Recepción</li>
+                        <li>
+                            <a [routerLink]="['/inicio']" class="waves-effect">
+                                <i class="dripicons-meter"></i> <span> Inicio </span>
+                            </a>
+                        </li>
+
+
+
+
+                     
+
+
+                           <li>
+                            <a   (click)="VacunasRecibidas = !VacunasRecibidas" class="waves-effect mm-active"><i class="dripicons-mail"></i><span> Vacunas Recibidas
+                            <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                            <ul class="submenu mm-collapse " [ngClass]=" VacunasRecibidas ? 'mm-show' : 'secondary'" >
+                                <li><a [routerLink]="['/vacunas_recibidas/admin/form']">Agregar </a></li>
+                                <li><a [routerLink]="['/vacunas_recibidas/admin/list']">Listado </a></li>
+                               
+                           
+                            </ul>
+                        </li>            
+
+
+            
+
+
+                          <li>
+                            <a [routerLink]="['/usuarios/admin/actualizar/password', usuarios.user.id]"  href="javascript:void(0)" class="waves-effect">
+                                <i class="dripicons-meter"></i> <span> Cambiar Contraseña </span>
+                            </a>
+                        </li> 
+                      
+                       
+
+
+                       <li>
+                            <a (click)="logout()" href="javascript:void(0)" class="waves-effect">
+                                <i class="dripicons-meter"></i> <span> Cerrar Sesion </span>
+                            </a>
+                        </li>
+
+                     
+                     
+
+             
+
+                  
+
+                      
+
+
+
+                     
+
+                     
+
+                    
+
+                   
+
+                    </ul>
+
+                </div>
+                <!-- Sidebar -->
+                <div class="clearfix"></div>
+
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>

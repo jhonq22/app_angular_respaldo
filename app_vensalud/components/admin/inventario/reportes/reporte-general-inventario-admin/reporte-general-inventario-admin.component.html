@@ -1,0 +1,1224 @@
+<div class="wrapper">
+
+    <!-- Navbar -->
+   <app-navbar></app-navbar>
+    <!-- /.navbar -->
+  
+    <!-- Main Sidebar Container -->
+  <app-sidebar></app-sidebar>
+
+  
+    <!-- Content Wrapper. Contains page content -->
+    
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+               
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a [routerLink]="['/inventario/admin/list']">Inventario</a></li>
+                  <li class="breadcrumb-item active">Reportes</li>
+                </ol>
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+
+          <div class="container-fluid">
+           
+            <div class="row">
+              <div class="col-12">
+                <!-- Custom Tabs -->
+                <div class="card">
+                  <div class="card-header d-flex p-0">
+                    <h3 class="card-title p-3">Inventario Equipo</h3>
+                    <ul class="nav nav-pills ml-auto p-2">
+                      <li class="nav-item"><a class="nav-link active" (click)="onReset()" href="#tab_1" data-toggle="tab">Reportes General</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#tab_2" (click)="onReset()" data-toggle="tab">Reportes Por Estatus</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#tab_3" (click)="onReset()" data-toggle="tab">Reportes Por Condición </a></li>
+                      <li class="nav-item"><a class="nav-link" href="#tab_4" (click)="onReset()" data-toggle="tab">Buscar Por Equipos</a></li>
+                    
+                    </ul>
+                  </div><!-- /.card-header -->
+                  <div class="card-body">
+                    <div class="tab-content">
+                      
+                      <div class="tab-pane active" id="tab_1">
+
+
+                        <div class="form-row">
+
+                      <div class="form-group col-md-6">
+                        <label >Fecha 1</label>
+                        <input type="date" class="form-control"  required placeholder="Fecha Desde"
+                         [(ngModel)]="fecha1"
+                        >
+                                             
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label >Fecha 2</label>
+                        <input type="date" class="form-control"  required placeholder="Fecha Hasta"
+                         [(ngModel)]="fecha2" (blur)="getInventarios()"
+                        >
+                                             
+                      </div>
+
+                    <p class="text-danger">*Es obligatorio ingresar las fechas, para poder generar los reportes...</p>
+
+                    </div>
+
+                        <button
+                        class="btn btn-primary m-2"
+                        (click)="PDFGeneral()" 
+                        *ngIf="reportegeneral"           
+                        >Imprimir Reporte General Detallado 
+                       </button>
+
+                         <button
+                       class="btn btn-danger m-4"
+                       (click)="GlobalGeneralPDF()"
+                       *ngIf="reportegeneral"            
+                       >Imprimir PDF General Especifico
+                      </button>
+
+                       <button
+                       class="btn btn-success m-4"
+                       (click)="excelinventarioGeneral()"
+                       *ngIf="reportegeneral"            
+                       >Excel General 
+                      </button>
+
+                        <form role="form" [formGroup]="Form">
+                          <div class="card-body">
+        
+        
+        
+        
+        
+                            <div class="form-row">
+        
+                              
+                                <div class="form-group col-md-9">
+                                 <label >Estado:</label>
+                                 <select type="text" class="form-control" placeholder="Ingresar"
+                                 [ngClass]=" Form.controls['estado_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                  formControlName="estado_id" [(ngModel)]="estado_id"  (change)="getMunicipios($event.target.value)"
+                                    (blur)="getInventarioEstadal()">
+                                
+                                <option *ngFor="let estado of estados" value="{{estado.id}}">{{estado.estado}}</option>
+                                </select>
+                                
+                                <div class="invalid-feedback"
+                                *ngIf="Form.controls['estado_id'].touched && 
+                                 Form.controls['estado_id'].errors?.required" >
+                                    Estado es Obligatorio...
+                                </div>
+                              </div>
+
+                      
+        
+                              <div class=" form-group  col-md-3 ">
+                       
+                                 <button
+                       class="btn btn-danger m-4"
+                       (click)="PDFEstadal()"
+                       *ngIf="pdfEstadal1"            
+                       >Imprimir PDF Detallado Estadal 
+                      </button>
+                              </div>
+
+
+
+                        <button
+                       class="btn btn-primary m-4"
+                       (click)="GlobalGeneralEstadalPDF()"
+                       *ngIf="pdfEstadal1"            
+                       >PDF Especifico Estadal 
+                      </button>
+
+
+                       <button
+                       class="btn btn-success m-4"
+                       (click)="excelinventarioEstadal()"
+                       *ngIf="pdfEstadal1"            
+                       >Excel  Estadal 
+                      </button>
+
+
+        
+                               </div>
+        
+        
+        
+        
+        
+        
+        
+        
+                            <div class="form-row">
+        
+                              
+                             <div class="form-group col-md-9">
+                              <label >Municipio:</label>
+                               <select type="text" class="form-control" placeholder="Ingresar "
+                             [ngClass]=" Form.controls['municipio_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                              formControlName="municipio_id" [(ngModel)]="municipio_id"  (change)="getCentroSalud($event.target.value)"
+                              (blur)="getInventarioMunicipal()"          
+                              >
+                            
+                              <option *ngFor="let municipio of municipios" value="{{municipio.id}}">{{municipio.municipio}}</option>
+                            </select>
+        
+                            <div class="invalid-feedback"
+                            *ngIf="Form.controls['municipio_id'].touched && 
+                             Form.controls['municipio_id'].errors?.required"   >
+                                Municipio es Obligatorio...
+                            </div>
+        
+                           </div>
+        
+                           <div class=" form-group  col-md-3 ">
+                       
+                             <button
+                      class="btn btn-primary m-4"
+                      (click)="PDFMunicipal()"
+                      *ngIf="pdfMunicipal"             
+                      >Imprimir PDF Detallado Municipal 
+                     </button>
+                          </div>
+
+
+                      <button
+                       class="btn btn-danger m-4"
+                       (click)="GlobalGeneralMunicipalPDF()"
+                       *ngIf="pdfMunicipal"            
+                       >PDF Especifico Municipal 
+                      </button>
+
+                       
+
+
+                            </div>
+        
+                           
+                            
+        
+                        <div class="form-row">
+                              
+                              <div class="form-group col-md-9">
+                                <label>Centro Salud</label>
+                                <select type="text" class="form-control" placeholder="Ingresar Centro de Salud"
+                                 [ngClass]=" Form.controls['centro_salud_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                 formControlName="centro_salud_id" [(ngModel)]="centro_salud_id"
+                                 (blur)="getInventarioCentroSalud()" 
+                                            
+                                >
+                            
+                              <option *ngFor="let centrossalud of centrosalud" value="{{centrossalud.id}}">{{centrossalud.centro_salud}}</option>
+                            </select>
+        
+                                    <div class="invalid-feedback"
+                                    *ngIf="Form.controls['centro_salud_id'].touched && 
+                                    Form.controls['centro_salud_id'].errors?.required"   >
+                                        Centro de Salud es Obligatorio...
+                                    </div>
+                             </div>
+        
+        
+        
+                             <div class=" form-group  col-md-3 ">
+                       
+                                <button
+                     class="btn btn-primary m-4"
+                     (click)="PDFCentroSalud()"
+                     *ngIf="pdfCentroSalud"             
+                     >Imprimir PDF Detallado Centro Salud 
+                    </button>
+                              </div>
+
+
+                       <button
+                       class="btn btn-danger m-4"
+                       (click)="GlobalGeneralCentroSaludPDF()"
+                       *ngIf="pdfCentroSalud"            
+                       >PDF Especifico Centro Salud 
+                      </button>
+
+
+                        <button
+                       class="btn btn-success m-4"
+                       (click)="excelinventarioCentroSalud()"
+                       *ngIf="pdfCentroSalud"            
+                       >Excel  Centro Salud  
+                      </button>
+
+                         </div>
+        
+        
+                    
+                     
+        
+        
+        
+                    
+        
+                      
+            
+                            </div>
+                            <!-- /.card-body -->
+            
+             
+        
+        
+        
+                <div class="card-footer">
+                  <button
+                  class="btn btn-danger"
+                  (click)="resetForm()"
+              >Limpiar Formulario 
+            </button>
+        
+            
+              
+        
+              </div>
+        
+                        </form>
+                      </div>
+
+
+
+
+
+
+
+
+
+    
+    
+                      <!-- /.tab-pane 2 REPORTES ESTATUS -->
+                      <div class="tab-pane" id="tab_2">
+
+                      <div class="form-row">
+
+                      <div class="form-group col-md-6">
+                        <label >Fecha 1</label>
+                        <input type="date" class="form-control"  required placeholder="Fecha Desde"
+                         [(ngModel)]="fecha1"
+                        >
+                                             
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label >Fecha 2</label>
+                        <input type="date" class="form-control"  required placeholder="Fecha Hasta"
+                         [(ngModel)]="fecha2"
+                        >
+                                             
+                      </div>
+
+                    <p class="text-danger">*Es obligatorio ingresar las fechas, para poder generar los reportes...</p>
+          </div>
+
+                        <form role="form" [formGroup]="Form2">
+                          <div class="card-body">
+        
+        
+        
+                            <div class="form-row">
+        
+
+                                 <div class="form-group col-md-9">
+                      <label>Equipo</label>
+                      <select type="text" class="form-control" placeholder=""
+                       [ngClass]=" Form2.controls['equipo'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                       formControlName="equipo" [(ngModel)]="equipoBusqueda"           
+                      >
+                  
+                    <option *ngFor="let equipo of equipos" value="{{equipo.id}}">{{equipo.equipo}}</option>
+                  </select>
+
+                          <div class="invalid-feedback"
+                          *ngIf="Form2.controls['equipo'].touched && 
+                          Form2.controls['equipo'].errors?.required"   >
+                              Equipos es Obligatorio...
+                          </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                              
+                              <div class="form-group col-md-9">
+                               <label >Estatus Equipos:</label>
+                               <select type="text" class="form-control" placeholder="Ingresar"
+                               [ngClass]=" Form2.controls['estatu_equipo_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                formControlName="estatu_equipo_id" [(ngModel)]="estatu_equipo_id"  (blur)="getInventarioGeneralEstatus()"         
+                                >
+                              
+                                <option *ngFor="let estatusequipo of estatusequipos" value="{{estatusequipo.id}}">{{estatusequipo.estatu_equipo}}</option>
+                              </select>
+                              
+                              <div class="invalid-feedback"
+                              *ngIf="Form2.controls['estatu_equipo_id'].touched && 
+                               Form2.controls['estatu_equipo_id'].errors?.required" >
+                                  Estatus Equipo es Obligatorio...
+                              </div>
+
+
+
+                           
+                            </div>
+      
+                              <button
+                       *ngIf="reportegeneralEstatus"
+                       class="btn btn-danger m-2"
+                       (click)="PDFGeneralPorEstatus()"
+                                  
+                       >Imprimir Reporte General Estatus
+                      </button>
+
+                           <button
+                       *ngIf="reportegeneralEstatus"
+                       class="btn btn-success m-2"
+                       (click)="excelinventarioGeneralEstatus()"
+                                  
+                       >Excel Reporte General Estatus
+                      </button>
+      
+                             </div>
+
+        
+        
+                            <div class="form-row">
+        
+                              
+                                <div class="form-group col-md-9">
+                                 <label >Estado:</label>
+                                 <select type="text" class="form-control" placeholder="Ingresar"
+                                 [ngClass]=" Form2.controls['estado_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                  formControlName="estado_id" [(ngModel)]="estado_id"  (change)="getMunicipios($event.target.value)" 
+                                  (blur)="getInventarioEstadalEstatus()"        
+                                  >
+                                
+                                <option *ngFor="let estado of estados" value="{{estado.id}}">{{estado.estado}}</option>
+                                </select>
+                                
+                                <div class="invalid-feedback"
+                                *ngIf="Form2.controls['estado_id'].touched && 
+                                 Form2.controls['estado_id'].errors?.required" >
+                                    Estado es Obligatorio...
+                                </div>
+                              </div>
+        
+                              <div class=" form-group  col-md-3 ">
+                       
+                              <button
+                       class="btn btn-danger m-2"
+                       (click)="PDFEstadalPorEstatus()"
+                       *ngIf="pdfEstadal"            
+                       >Imprimir Estadal Estatus
+                      </button>
+
+
+
+
+                              </div>
+
+                              
+                           <button
+                       *ngIf="pdfEstadal"
+                       class="btn btn-success m-2"
+                       (click)="excelinventarioEstadalEstatus()"
+                                  
+                       >Excel Reporte Estadal Estatus
+                      </button>
+        
+                               </div>
+        
+        
+        
+        
+        
+        
+        
+        
+                            <div class="form-row">
+        
+                              
+                             <div class="form-group col-md-9">
+                              <label >Municipio:</label>
+                               <select type="text" class="form-control" placeholder="Ingresar "
+                             [ngClass]=" Form2.controls['municipio_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                              formControlName="municipio_id" [(ngModel)]="municipio_id"  (change)="getCentroSalud($event.target.value)"
+                              (blur)="getInventarioMunicipalEstatus()"          
+                              >
+                            
+                              <option *ngFor="let municipio of municipios" value="{{municipio.id}}">{{municipio.municipio}}</option>
+                            </select>
+        
+                            <div class="invalid-feedback"
+                            *ngIf="Form2.controls['municipio_id'].touched && 
+                             Form2.controls['municipio_id'].errors?.required"   >
+                                Municipio es Obligatorio...
+                            </div>
+        
+                           </div>
+        
+                           <div class=" form-group  col-md-3 ">
+                       
+                           <button
+                      class="btn btn-danger m-2"
+                      (click)="PDFMunicipalPorEstatus()"
+                      *ngIf="pdfMunicipal"             
+                      >Imprimir Reporte Municipal Estatus
+                     </button>
+                          </div>
+
+                          
+                           <button
+                       *ngIf="pdfMunicipal"
+                       class="btn btn-success m-2"
+                       (click)="excelinventarioMunicipalEstatusData()"
+                                  
+                       >Excel Reporte Municipal Estatus
+                      </button>
+                            </div>
+        
+                           
+                            
+        
+                        <div class="form-row">
+                              
+                              <div class="form-group col-md-9">
+                                <label>Centro Salud</label>
+                                <select type="text" class="form-control" placeholder="Ingresar Centro de Salud"
+                                 [ngClass]=" Form2.controls['centro_salud_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                 formControlName="centro_salud_id" [(ngModel)]="centro_salud_id"
+                                 (blur)="getInventarioCentroSaludEstatus()"           
+                                >
+                            
+                              <option *ngFor="let centrossalud of centrosalud" value="{{centrossalud.id}}">{{centrossalud.centro_salud}}</option>
+                            </select>
+        
+                                    <div class="invalid-feedback"
+                                    *ngIf="Form2.controls['centro_salud_id'].touched && 
+                                    Form2.controls['centro_salud_id'].errors?.required"   >
+                                        Centro de Salud es Obligatorio...
+                                    </div>
+                             </div>
+        
+        
+        
+                             <div class=" form-group  col-md-3 ">
+                       
+                                  <button
+                     class="btn btn-info m-2"
+                     (click)="PDFCentroSaludPorEstatus()"
+                     *ngIf="pdfCentroSalud"             
+                     >Imprimir Reporte Centro Salud 
+                    </button>
+                              </div>
+
+
+
+                                 <button
+                       *ngIf="pdfCentroSalud"
+                       class="btn btn-success m-2"
+                       (click)="excelinventarioCentroSaludEstatusData()"
+                                  
+                       >Excel Reporte Centro Salud 
+                      </button>
+                         </div>
+        
+        
+                    
+                     
+        
+        
+        
+                    
+        
+                      
+            
+                            </div>
+                            <!-- /.card-body -->
+            
+                    <div class="card-footer">
+
+                     
+                     
+                   </div>
+        
+        
+        
+                <div class="card-footer">
+                  <button
+                  class="btn btn-danger"
+                  (click)="resetForm()"
+              >Limpiar Formulario 
+            </button>
+        
+            
+              
+        
+              </div>
+        
+                        </form>
+
+
+                
+                      </div>
+    
+    
+                      <!-- /.tab-pane 2 REPORTES CENTRO SALUD -->
+                      <div class="tab-pane" id="tab_3">
+
+                      <div class="form-row">
+
+                      <div class="form-group col-md-6">
+                        <label >Fecha 1</label>
+                        <input type="date" class="form-control"  required placeholder="Fecha Desde"
+                         [(ngModel)]="fecha1"
+                        >
+                                             
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label >Fecha 2</label>
+                        <input type="date" class="form-control"  required placeholder="Fecha Hasta"
+                         [(ngModel)]="fecha2" (blur)="getInventarioGlobalReparado()"
+                        >
+                                             
+                      </div>
+
+                    <p class="text-danger">*Es obligatorio ingresar las fechas, para poder generar los reportes...</p>
+
+                    
+          </div>
+
+
+            <button
+                        class="btn btn-primary m-2"
+                        (click)="GlobalGeneralReparadoPDF()" 
+                        *ngIf="reportegeneral"           
+                        >Imprimir Reporte Por Condición Especifico 
+                       </button>
+
+                        <form role="form" [formGroup]="Form3">
+                          <div class="card-body">
+        
+        
+        
+                       
+               <div class="form-row">
+
+                    <div class="form-group col-md-9">
+                      <label>Equipo</label>
+                      <select type="text" class="form-control" placeholder=""
+                       [ngClass]=" Form3.controls['equipo'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                       formControlName="equipo" [(ngModel)]="equipoBusqueda"           
+                      >
+                  
+                    <option *ngFor="let equipo of equipos" value="{{equipo.id}}">{{equipo.equipo}}</option>
+                  </select>
+
+                          <div class="invalid-feedback"
+                          *ngIf="Form3.controls['equipo'].touched && 
+                          Form3.controls['equipo'].errors?.required"   >
+                              Equipos es Obligatorio...
+                          </div>
+              </div>
+
+
+
+
+
+        
+                              
+                              <div class="form-group col-md-9">
+                               <label >Condición:</label>
+                               <select type="text" class="form-control" placeholder="Ingresar"
+                               [ngClass]=" Form3.controls['reparado'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                formControlName="reparado" [(ngModel)]="reparado" (blur)="getInventarioGlobalReparado()"           
+                                >
+                              
+                    <option value="reparado">Reparado</option>
+                    <option value="instalado">Instalado</option>
+                     <option value="revision tecnica">Revisión Técnica</option>
+                     <option value="mantenimiento preventivo">Mantenimiento Preventivo</option>
+                     <option value="con fallas">Con Fallas</option>
+                              </select>
+                              
+                              <div class="invalid-feedback"
+                              *ngIf="Form3.controls['reparado'].touched && 
+                               Form3.controls['reparado'].errors?.required" >
+                                  Condición  es Obligatorio...
+                              </div>
+                            </div>
+      
+                           
+      
+                             </div>
+
+        
+        
+                            <div class="form-row">
+        
+                              
+                                <div class="form-group col-md-9">
+                                 <label >Estado:</label>
+                                 <select type="text" class="form-control" placeholder="Ingresar"
+                                 [ngClass]=" Form3.controls['estado_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                  formControlName="estado_id" [(ngModel)]="estado_id"  (change)="getMunicipios($event.target.value)"   
+                                  (blur)="getInventarioEstadalReparado()"        
+                                  >
+                                
+                                <option *ngFor="let estado of estados" value="{{estado.id}}">{{estado.estado}}</option>
+                                </select>
+                                
+                                <div class="invalid-feedback"
+                                *ngIf="Form3.controls['estado_id'].touched && 
+                                 Form3.controls['estado_id'].errors?.required" >
+                                    Estado es Obligatorio...
+                                </div>
+                              </div>
+        
+                              <div class=" form-group  col-md-3 ">
+                       
+                             <button  
+                       class="btn btn-danger m-2"
+                       (click)="PDFEstadalPorReparado()"
+                       *ngIf="pdfEstadal1"            
+                       >Imprimir PDF Detallado Estadal Condición 
+                      </button>
+
+                       
+
+
+                              </div>
+
+                                   <button  
+                       class="btn btn-primary m-2"
+                       (click)="GlobalCondicionEstadalPDF()"
+                       *ngIf="pdfEstadal1"            
+                       >Imprimir PDF Especifico Estadal Condición 
+                      </button>
+
+
+                      <button
+                       *ngIf="pdfEstadal1"
+                       class="btn btn-success m-2"
+                       (click)="excelinventarioEstadalReparadoData()"
+                                  
+                       >Excel Reporte Estadal Condición
+                      </button>
+        
+                               </div>
+        
+        
+        
+                               <div class="form-row">
+        
+                              
+                                <div class="form-group col-md-9">
+                                 <label >Municipio:</label>
+                                 <select type="text" class="form-control" placeholder="Ingresar"
+                                 [ngClass]=" Form3.controls['municipio_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                  formControlName="municipio_id" [(ngModel)]="municipio_id"  (change)="getCentroSalud($event.target.value)"
+                                  (blur)="getInventarioMunicipalReparado()"           
+                                  >
+                                
+                                     <option *ngFor="let municipio of mun" value="{{municipio.id}}">{{municipio.municipio}}</option>
+                                </select>
+                                
+                                <div class="invalid-feedback"
+                                *ngIf="Form3.controls['municipio_id'].touched && 
+                                 Form3.controls['municipio_id'].errors?.required" >
+                                    Municipio es Obligatorio...
+                                </div>
+                              </div>
+        
+                              <div class=" form-group  col-md-3 ">
+                       
+                               
+                      <button
+                      class="btn btn-danger m-2"
+                      (click)="PDFMunicipalPorReparado()"
+                      *ngIf="pdfMunicipal"             
+                      >Imprimir PDF Detallado Municipal Condición
+                     </button>
+                              </div>
+
+                                   <button
+                      class="btn btn-primary m-2"
+                      (click)="GlobalReparadoMunicipalPDF()"
+                      *ngIf="pdfMunicipal"             
+                      >Imprimir PDF Especifico Municipal Condición
+                     </button>
+
+                       <button
+                       *ngIf="pdfMunicipal"
+                       class="btn btn-success m-2"
+                       (click)="excelinventarioMunicipalReparadoData()"
+                                  
+                       >Excel Reporte Municipal Condición
+                      </button>
+        
+                               </div>
+        
+        
+        
+        
+                          
+        
+                           
+                            
+        
+                        <div class="form-row">
+                              
+                              <div class="form-group col-md-9">
+                                <label>Centro Salud</label>
+                                <select type="text" class="form-control" placeholder="Ingresar Centro de Salud"
+                                 [ngClass]=" Form3.controls['centro_salud_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                 formControlName="centro_salud_id" [(ngModel)]="centro_salud_id"   
+                                 (blur)="getInventarioCentroSaludReparado()"          
+                                >
+                            
+                              <option *ngFor="let centrossalud of centrosalud" value="{{centrossalud.id}}">{{centrossalud.centro_salud}}</option>
+                            </select>
+        
+                                    <div class="invalid-feedback"
+                                    *ngIf="Form3.controls['centro_salud_id'].touched && 
+                                    Form3.controls['centro_salud_id'].errors?.required"   >
+                                        Centro de Salud es Obligatorio...
+                                    </div>
+                             </div>
+        
+        
+        
+                             <div class=" form-group  col-md-3 ">
+                       
+                               <button
+                     class="btn btn-primary m-2"
+                     (click)="PDFCentroSaludPorReparado()"
+                     *ngIf="pdfCentroSalud"             
+                     >Imprimir PDF Detallado Centro Salud  Condición
+                    </button>
+                              </div>
+
+
+                                      <button
+                     class="btn btn-danger m-2"
+                     (click)="GlobalReparadoCentroSaludPDF()"
+                     *ngIf="pdfCentroSalud"             
+                     >Imprimir PDF Especifico Centro Salud  Condición
+                    </button>
+
+
+
+                     <button
+                       *ngIf="pdfCentroSalud"
+                       class="btn btn-success m-2"
+                       (click)="excelinventarioCentroSaludReparadoData()"
+                                  
+                       >Excel Reporte Centro Salud Condición
+                      </button>
+                         </div>
+        
+        
+                    
+                     
+        
+        
+        
+                    
+        
+                      
+            
+                            </div>
+                            <!-- /.card-body -->
+            
+                    <div class="card-footer">
+                       
+        
+                    
+                   </div>
+        
+        
+        
+                <div class="card-footer">
+                  <button
+                  class="btn btn-danger"
+                  (click)="resetForm()"
+              >Limpiar Formulario 
+            </button>
+        
+            
+              
+        
+              </div>
+        
+                        </form>
+    
+                    
+    
+    
+    
+    
+    
+                    
+    
+    
+                       
+    
+    
+    
+                      </div>
+
+
+
+
+
+
+
+
+                      <div class="tab-pane" id="tab_4">
+
+                      <div class="form-row">
+
+                      <div class="form-group col-md-6">
+                        <label >Fecha 1</label>
+                        <input type="date" class="form-control"  required placeholder="Fecha Desde"
+                         [(ngModel)]="fecha1"
+                        >
+                                             
+                      </div>
+
+                      <div class="form-group col-md-6">
+                        <label >Fecha 2</label>
+                        <input type="date" class="form-control"  required placeholder="Fecha Hasta"
+                         [(ngModel)]="fecha2"
+                        >
+                                             
+                      </div>
+
+                    <p class="text-danger">*Es obligatorio ingresar las fechas, para poder generar los reportes...</p>
+          </div>
+                        <form role="form" [formGroup]="Form4">
+                          <div class="card-body">
+                    
+                            <div class="form-row">
+                    
+
+
+                          <div class="form-group col-md-9">
+                      <label>Equipo</label>
+                      <select type="text" class="form-control" placeholder=""
+                       [ngClass]=" Form4.controls['equipo'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                       formControlName="equipo" [(ngModel)]="equipoBusqueda" (blur)="getInventarioBusquedaPorEquipos()"        
+                      >
+                  
+                    <option *ngFor="let equipo of equipos" value="{{equipo.id}}">{{equipo.equipo}}</option>
+                  </select>
+
+                          <div class="invalid-feedback"
+                          *ngIf="Form4.controls['equipo'].touched && 
+                          Form4.controls['equipo'].errors?.required"   >
+                              Equipos es Obligatorio...
+                          </div>
+              </div>
+
+
+
+
+
+
+
+                           <div class=" form-group  col-md-3 ">
+   
+                           <button
+                      class="btn btn-success m-2"
+                      (click)="PDFBusquedaPorEquipos()"
+                      *ngIf="pdfEquipo" >Imprimir Reporte Detallado Equipos General
+                      </button>
+                          </div>
+
+                    <button
+                      class="btn btn-success m-2"
+                      (click)="GlobalGeneralEquipoPDF()"
+                      *ngIf="pdfEquipo" >Imprimir Reporte Especifico Equipos General
+                      </button>
+
+                          </div>
+
+
+
+                      
+                    
+                    
+                    
+                            <div class="form-row">
+                    
+                              
+                                <div class="form-group col-md-9">
+                                 <label >Estado:</label>
+                                 <select type="text" class="form-control" placeholder="Ingresar"
+                                 [ngClass]=" Form4.controls['estado_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                  formControlName="estado_id" [(ngModel)]="estado_id"  (change)="getMunicipios($event.target.value)" 
+                                  (blur)="getInventarioBusquedaPorEquiposEstadal()"          
+                                  >
+                                
+                                <option *ngFor="let estado of estados" value="{{estado.id}}">{{estado.estado}}</option>
+                                </select>
+                                
+                                <div class="invalid-feedback"
+                                *ngIf="Form4.controls['estado_id'].touched && 
+                                 Form4.controls['estado_id'].errors?.required" >
+                                    Estado es Obligatorio...
+                                </div>
+                              </div>
+                    
+                              <div class=" form-group  col-md-3 ">
+                       
+                                 <button
+                       class="btn btn-success m-2"
+                       (click)="PDFBusquedaPorEquiposEstadal()"
+                       *ngIf="pdfEstadal1"            
+                       >Imprimir PDF Estadal Detallado Por Equipos
+                      </button>
+                              </div>
+
+                                      <button
+                       class="btn btn-success m-2"
+                       (click)="GlobalGeneralEstadalEquipoPDF()"
+                       *ngIf="pdfEstadal1"            
+                       >Imprimir PDF Estadal Especifico Por Equipos
+                      </button>
+                    
+                               </div>
+                    
+                    
+                               <div class="form-row">
+                                      
+                                <div class="form-group col-md-9">
+                                 <label >Municipio:</label>
+                                 <select type="text" class="form-control" placeholder="Ingresar"
+                                 [ngClass]=" Form4.controls['municipio_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                  formControlName="municipio_id" [(ngModel)]="municipio_id"  (change)="getCentroSalud($event.target.value)"
+                                  (blur)="getInventarioBusquedaPorEquiposMunicipal()"  
+                                  
+                                  >
+
+
+
+                          
+                                  <option *ngFor="let municipio of mun" value="{{municipio.id}}">{{municipio.municipio}}</option>
+                                </select>
+                                
+                                <div class="invalid-feedback"
+                                *ngIf="Form4.controls['municipio_id'].touched && 
+                                 Form4.controls['municipio_id'].errors?.required" >
+                                    Municipio es Obligatorio...
+                                </div>
+                              </div>
+                    
+                              <div class=" form-group  col-md-3 ">
+                       
+                               
+                      <button
+                      class="btn btn-danger m-2"
+                      (click)="PDFBusquedaPorEquiposMunicipal()"
+                      *ngIf="pdfMunicipal"             
+                      >Imprimir PDF Municipal Detallado Por Equipos
+                     </button>
+                              </div>
+
+                        <button
+                      class="btn btn-danger m-2"
+                      (click)="GlobalGeneralMunicipalEquipoPDF()"
+                      *ngIf="pdfMunicipal"             
+                      >Imprimir PDF Municipal Especifico Por Equipos
+                     </button>         
+                    
+                               </div>
+                    
+                    
+                    
+                            
+                    
+                        <div class="form-row">
+                              
+                              <div class="form-group col-md-9">
+                                <label>Centro Salud</label>
+                                <select type="text" class="form-control" placeholder="Ingresar Centro de Salud"
+                                 [ngClass]=" Form4.controls['centro_salud_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                 formControlName="centro_salud_id" [(ngModel)]="centro_salud_id"
+                                 (blur)="getInventarioBusquedaPorEquiposCentroSalud()"  >
+                            
+                              <option *ngFor="let centrossalud of centrosalud" value="{{centrossalud.id}}">{{centrossalud.centro_salud}}</option>
+                            </select>
+                    
+                                    <div class="invalid-feedback"
+                                    *ngIf="Form4.controls['centro_salud_id'].touched && 
+                                    Form4.controls['centro_salud_id'].errors?.required"   >
+                                        Centro de Salud es Obligatorio...
+                                    </div>
+                             </div>
+                    
+                    
+                    
+                             <div class=" form-group  col-md-3 ">
+                       
+                                <button
+                     class="btn btn-info m-2"
+                     (click)="PDFBusquedaPorEquiposCentroSalud()"
+                     *ngIf="pdfCentroSalud"             
+                     >Imprimir PDF Centro Salud Especifico Por Equipos
+                    </button>
+                              </div>
+
+
+                           <button
+                     class="btn btn-info m-2"
+                     (click)="GlobalGeneralCentroSaludEquipoPDF()"
+                     *ngIf="pdfCentroSalud"             
+                     >Imprimir PDF Centro Salud Detallado Por Equipos
+                    </button>         
+                         </div>
+                    
+                    
+                    
+                     
+                    
+                    
+                    
+                    
+                    
+                      
+                    
+                            </div>
+                            <!-- /.card-body -->
+                    
+                    <div class="card-footer">
+                       
+
+                        
+                   
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                    
+                    
+                    
+                    <div class="card-footer">
+                    <button
+                    class="btn btn-danger"
+                    (click)="resetForm()"
+                    >Limpiar Formulario 
+                    </button>
+                    
+                  
+                    
+                    
+                    </div>
+                    
+                        </form>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                       
+                    
+                    
+                    
+                      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      <!-- /.tab-pane -->
+                    </div>
+                    <!-- /.tab-content -->
+                  </div><!-- /.card-body -->
+                </div>
+                <!-- ./card -->
+              </div>
+              <!-- /.col -->
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+
+
+
+
+    <!-- /.content-wrapper -->
+    <app-footer></app-footer>
+  
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>

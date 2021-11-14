@@ -1,0 +1,159 @@
+<div class="wrapper">
+
+    <!-- Navbar -->
+   <app-navbar></app-navbar>
+    <!-- /.navbar -->
+  
+    <!-- Main Sidebar Container -->
+ <app-sidebar></app-sidebar>
+  
+    <!-- Content Wrapper. Contains page content -->
+    
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 >Biblioteca Virtual </h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a [routerLink]="['/inicio']">Inicio</a></li>
+                  <li class="breadcrumb-item active ">Biblioteca Virtual</li>
+                </ol>
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+         
+          
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+
+                     
+                    <button class="btn btn-primary" [routerLink]="['/biblioteca/admin/form']">Agregar</button>
+                    
+                    
+                    
+                    <div class="card-tools">
+                    
+                      
+                      <div class="input-group input-group-sm" style="width: 150px;">
+                        
+                        <input type="text"  name="filter" 
+                        [(ngModel)]="filter" class="form-control float-right" placeholder="Buscar..." >
+    
+                        <div class="input-group-append">
+                          
+                          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                  
+                  <!-- /.card-header -->
+                  <div class="card-body table-responsive p-0">
+                    <table class="table table-hover table-bordered" id="basic-table">
+                      <tr>
+                        <th>#</th>
+                        <th>Tipo Biblioteca</th>
+                        <th>Equipo</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Archivo</th>
+                        <th>Descripción</th>
+                        <th>Editar</th>
+                        
+                        
+                       
+                        
+                      </tr>
+                      <tr *ngFor="let bb of biblioteca 
+                      | filter: filter
+                    
+                      | paginate: { itemsPerPage: 10, currentPage: paginate }
+                      ;let indice=index">
+                          <td>{{indice+1}}</td>
+                          <td class="h-float">{{bb.tipo_bibloteca | titlecase}}</td>
+                          <td class="h-float">{{bb.equipo | titlecase}}</td>
+                          <td class="h-float">{{bb.marca | titlecase}}</td>
+                          <td class="h-float">{{bb.modelo | titlecase}}</td>
+                          <td class="h-float">
+                          
+                             <a href="{{bb.url_archivo}}" target="_blank" > 
+                          <img class="h-rotate-360" src="assets/iconos/pdf.png" >
+                        </a>  
+                          
+                          
+                          </td>
+                          <td class="h-float">{{bb.descripcion | titlecase}}</td>
+                        <td >
+                          <a > 
+                          <img class="h-rotate-360" src="assets/iconos/editar.png" [routerLink]="['/biblioteca/admin/edit', bb.id]">
+                        </a>  
+                        </td>
+                       
+                        
+                      </tr>
+                                       
+                     
+                    </table>
+                    <div class="col-6 mt-2" style="margin-left: 400px;">
+                    
+
+                  </div>
+                    <pagination-controls 
+                    (pageChange)="paginate = $event"  
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" >
+                  </pagination-controls>
+
+
+
+                  
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div><!-- /.row -->
+          </div><!-- /.container-fluid -->
+
+
+
+
+
+            
+
+
+
+
+
+
+
+        </section>
+        <!-- /.content -->
+      </div>
+
+
+
+
+    <!-- /.content-wrapper -->
+    <app-footer></app-footer>
+  
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>

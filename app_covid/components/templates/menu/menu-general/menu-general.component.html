@@ -1,0 +1,9 @@
+<app-menu-admin *ngIf="usuarios.user.rol_id === 1"></app-menu-admin>
+<app-menu-registrador *ngIf="usuarios.user.rol_id === 2 || usuarios.user.rol_id === 7"></app-menu-registrador>
+<app-menu-visor *ngIf="usuarios.user.rol_id === 3"></app-menu-visor>
+<app-menu-nacional *ngIf="usuarios.user.rol_id === 4"></app-menu-nacional>
+<app-menu-configuracion *ngIf="usuarios.user.rol_id === 5"></app-menu-configuracion>
+<app-menu-visor-estadal *ngIf="usuarios.user.rol_id === 6"></app-menu-visor-estadal>
+<app-menu-recepcion *ngIf="usuarios.user.rol_id === 8" ></app-menu-recepcion>
+<app-registrador-master *ngIf="usuarios.user.rol_id === 9" ></app-registrador-master>
+<app-menu-carga-masiva *ngIf="usuarios.user.rol_id === 10" ></app-menu-carga-masiva>

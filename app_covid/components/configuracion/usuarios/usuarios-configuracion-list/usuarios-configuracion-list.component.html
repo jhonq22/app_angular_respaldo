@@ -1,0 +1,121 @@
+  <div id="wrapper">
+
+        <!-- Top Bar Start -->
+       <app-sidebar></app-sidebar>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+      <app-menu-configuracion></app-menu-configuracion>
+        <!-- Left Sidebar End -->
+
+       <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+               
+
+          
+           <div class="container-fluid">
+                    <div class="page-title-box">
+
+                        <div class="row align-items-center ">
+                            <div class="col-md-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Listado de Usuarios Registradores</h4>
+                                  
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="float-right ">
+                                    <input type="text" class="form-control" [(ngModel)]="filter" name="filter" placeholder="Buscar...">
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page-title -->
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="mt-0 header-title">Listado de Usuarios Registradores</h4>
+                         
+
+                                    
+
+                                    <div class="table-rep-plugin">
+                                        <div class="table-responsive b-0" data-pattern="priority-columns">
+                                            <table id="tech-companies-1" class="table  table-striped">
+                                                <thead>
+                                         <tr >
+                                                        <th data-priority="1">Nombre Usuario</th>
+                                                        <th data-priority="3">Correo Electrónico</th>
+                                                        <th data-priority="3">Estado</th>
+                                                        <th data-priority="3">Centro de Salud</th>
+                                                        <th data-priority="3">Rol</th>
+                                                        <th data-priority="1">Acción</th>
+                                                       
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let usuario of usuarios
+                                          | filter: filter 
+                                          | paginate: { itemsPerPage: 10, currentPage: paginate }
+                                           ;let indice=index">
+
+                                                        <td class="h-float">{{usuario.name | titlecase}}</td>
+                                                        <td class="h-float">{{usuario.email | titlecase}}</td>
+                                                        <td class="h-float">{{usuario.estado | titlecase}}</td>
+                                                        <td class="h-float">{{usuario.centro_salud | titlecase}}</td>
+                                                        <td class="h-float">{{usuario.rol}}</td>
+                                                      
+                                                        <td> 
+                                                            <a ><img class="h-rotate-360" src="assets/iconos/editar.png" 
+                                                            [routerLink]="['/usuarios/admin/edit', usuario.id]">
+                                                            </a>  
+                                                        </td>
+                                                     
+                                                    </tr>
+                                                
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                                <pagination-controls 
+                    (pageChange)="paginate = $event"  
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" >
+                  </pagination-controls>
+                        </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                </div>
+
+
+
+
+
+            <!-- content -->
+
+            <footer class="footer">
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>

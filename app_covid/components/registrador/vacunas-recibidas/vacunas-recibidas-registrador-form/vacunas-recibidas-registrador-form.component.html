@@ -1,0 +1,315 @@
+  <div id="wrapper">
+
+        <!-- Top Bar Start -->
+       <app-sidebar></app-sidebar>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+      <app-menu-general></app-menu-general>
+        <!-- Left Sidebar End -->
+
+       <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+               
+
+               <div class="container-fluid">
+                    <div class="page-title-box">
+
+                        <div class="row align-items-center ">
+                            <div class="col-md-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Registro de Vacunas Recibidas Estadal</h4>
+                                  
+                                </div>
+                            </div>
+
+                         
+                        </div>
+                    </div>
+                    <!-- end page-title -->
+
+
+
+
+
+
+                    <form role="form" [formGroup]="Form">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                               <div class="form-group row">
+                                    
+                                   <label for="example-text-input" class="col-sm-2 col-form-label">Tipo de Vacuna</label>
+                                      <div class="col-sm-10">
+                                          <select type="text"  class="form-control" placeholder="Ingresar "
+                                      [ngClass]=" Form.controls['tipo_vacuna_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                       formControlName="tipo_vacuna_id" [(ngModel)]="vacunas.tipo_vacuna_id">
+                    
+                                       <option *ngFor="let tipovacuna of tipovacunas" value="{{tipovacuna.id}}">{{tipovacuna.nombre_vacuna}}</option>
+                                    </select>
+
+                                    <div class="invalid-feedback"
+                                    *ngIf="Form.controls['tipo_vacuna_id'].touched && 
+                                    Form.controls['tipo_vacuna_id'].errors?.required"   >
+                                        Tipo Vacuna  es Obligatorio...
+                                    </div>
+                                      </div>
+
+
+
+
+
+                                  
+                                    </div>
+                                    
+
+
+                                       <div class="form-group row">
+
+                                         <label for="example-text-input" class="col-sm-2 col-form-label">Componentes</label>
+                                    <div class="col-sm-10">
+                                 <select type="text" class="form-control" [ngClass]=" Form.controls['componentes'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"  placeholder="Ingresar" 
+                                 formControlName="componentes"  
+                                 [(ngModel)]="vacunas.componentes">
+                                 <option  value="1">1</option>
+                                 <option  value="2">2</option>
+                                
+                                                                                          
+                                 </select>
+
+                                   <div class="invalid-feedback"
+                                            *ngIf="Form.controls['componentes'].touched && 
+                                            Form.controls['componentes'].errors?.required"   >
+                                              Componentes es Obligatorio...
+                                        </div>
+
+                                   </div>
+                                   
+                                    </div>
+                                                 
+                             
+                               
+
+
+
+                                    <div class="form-group row" >
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Lote</label>
+                                      <div class="col-sm-10">
+                                         <input type="text" class="form-control"  placeholder="Ingresar Lote"
+                                            [ngClass]=" Form.controls['numero_lote'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                            formControlName="numero_lote" [(ngModel)]="vacunas.numero_lote">
+                                          
+                                            <div class="invalid-feedback"
+                                            *ngIf="Form.controls['numero_lote'].touched && 
+                                            Form.controls['numero_lote'].errors?.required"   >
+                                              Lote es Obligatorio...
+                                            </div>
+                              
+
+                                      </div>
+                                    </div>
+
+
+
+
+                                    <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Fecha De Vencimiento</label>
+                                      <div class="col-sm-10">
+                                        <input type="date" max="{{currentDate}}" onkeydown="return false" id="example-date-input" class="form-control"  placeholder="Ingresar fecha nacimiento"
+                                            [ngClass]=" Form.controls['fecha_vencimiento'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                            formControlName="fecha_vencimiento" [(ngModel)]="vacunas.fecha_vencimiento">                                        
+
+                                            <div class="invalid-feedback"
+                                            *ngIf="Form.controls['fecha_vencimiento'].touched && 
+                                            Form.controls['fecha_vencimiento'].errors?.required"   >
+                                              Fecha Vencimiento es Obligatorio...
+                                            </div>
+                                      </div>
+                                    </div>                
+
+                                    <div class="form-group row" >
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Cantidad Enviada</label>
+                                      <div class="col-sm-10">
+                                         <input type="text" class="form-control"  placeholder="Ingresar Cantidad"
+                                            [ngClass]=" Form.controls['cantidad'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                            formControlName="cantidad" [(ngModel)]="vacunas.cantidad">
+                                          
+                                            <div class="invalid-feedback"
+                                            *ngIf="Form.controls['cantidad'].touched && 
+                                            Form.controls['cantidad'].errors?.required"   >
+                                              Cantidad es Obligatorio...
+                                            </div>
+                                
+
+                                      </div>
+                                    </div>
+
+
+
+
+                                       <div class="form-group row" >
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Cantidad Recibida</label>
+                                      <div class="col-sm-10">
+                                         <input type="text" class="form-control"  placeholder="Ingresar Cantidad "
+                                            [ngClass]=" Form.controls['cantidad_recibida'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                            formControlName="cantidad_recibida" [(ngModel)]="vacunas.cantidad_recibida">
+                                          
+                                            <div class="invalid-feedback"
+                                            *ngIf="Form.controls['cantidad_recibida'].touched && 
+                                            Form.controls['cantidad_recibida'].errors?.required"   >
+                                              Cantidad Recibida es Obligatorio...
+                                            </div>
+                                
+
+                                      </div>
+                                    </div>     
+                                                    
+                                                                     
+                                    
+                             
+
+
+               
+
+
+
+
+
+
+
+
+
+                                      <div class="form-group row" >
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Observación</label>
+                                      <div class="col-sm-10">
+                                         <textarea  rows="4" cols="50" class="form-control"
+                                            [ngClass]=" Form.controls['observacion'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                            formControlName="observacion" [(ngModel)]="vacunas.observacion"> 
+                                            </textarea>
+                                          
+                                            <div class="invalid-feedback"
+                                            *ngIf="Form.controls['observacion'].touched && 
+                                            Form.controls['observacion'].errors?.required"   >
+                                              Observación es Obligatorio...
+                                            </div>
+                                
+
+                                      </div>
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  
+
+
+
+
+
+
+
+
+
+
+
+<!-- *ngIf="vacunas.dosis1 ==='si' && estatusForm || estatusDosis2 -->
+                                   
+                           
+
+
+
+
+
+
+                                
+
+                                   
+                                
+
+                                <button type="submit" style="margin-left:450px; margin-top:40px" [disabled]="Form.invalid"  *ngIf="!edit" class="btn btn-primary btn-lg" (click)="Guardar()">Guardar</button>
+                                <button type="submit" style="margin-left:450px; margin-top:40px" [disabled]="Form.invalid" *ngIf="edit" class="btn btn-primary btn-lg" (click)="Actualizar()">Actualizar</button>
+                             
+                            
+                                
+
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                        <!-- end col -->
+
+                        
+                    </div>
+                    <!-- end row -->
+
+
+
+
+
+
+
+
+
+
+                    </form>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- container-fluid -->
+
+            </div>
+            <!-- content -->
+
+            <footer class="footer">
+              
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>

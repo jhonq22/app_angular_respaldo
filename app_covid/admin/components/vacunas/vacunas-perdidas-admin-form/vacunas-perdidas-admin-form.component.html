@@ -1,0 +1,251 @@
+  <div id="wrapper">
+
+        <!-- Top Bar Start -->
+       <app-sidebar></app-sidebar>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+      <app-menu-general></app-menu-general>
+        <!-- Left Sidebar End -->
+
+       <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+               
+
+               <div class="container-fluid">
+                    <div class="page-title-box">
+
+                        <div class="row align-items-center ">
+                            <div class="col-md-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Formulario de Vacunas Perdidas</h4>
+                                  
+                                </div>
+                            </div>
+
+                         
+                        </div>
+                    </div>
+                    <!-- end page-title -->
+
+
+
+                                     
+
+
+
+                    <form role="form" [formGroup]="Form">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+
+                                        <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Tipo de Vacuna</label>
+                                      <div class="col-sm-10">
+                                          <select type="text"  class="form-control" placeholder="Ingresar "
+                                      [ngClass]=" Form.controls['tipo_vacuna_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                       formControlName="tipo_vacuna_id" [(ngModel)]="vacunas.tipo_vacuna_id">
+                    
+                                       <option *ngFor="let tipovacuna of tipovacunas" value="{{tipovacuna.id}}">{{tipovacuna.nombre_vacuna}}</option>
+                                    </select>
+
+                                    <div class="invalid-feedback"
+                                    *ngIf="Form.controls['tipo_vacuna_id'].touched && 
+                                    Form.controls['tipo_vacuna_id'].errors?.required"   >
+                                        Tipo Vacuna  es Obligatorio...
+                                    </div>
+                                      </div>
+                                    </div>
+
+
+
+                                 
+
+                                      <div class="form-group row" >
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Numero de Lote</label>
+                                      <div class="col-sm-10">
+                                         <input type="text"  class="form-control"  placeholder="Ingresar Numero de Lote"
+                                            [ngClass]=" Form.controls['numero_lote'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                            formControlName="numero_lote" [(ngModel)]="vacunas.numero_lote"
+                                            >
+                                          
+                                            <div class="invalid-feedback"
+                                            *ngIf="Form.controls['numero_lote'].touched && 
+                                            Form.controls['numero_lote'].errors?.required"   >
+                                             Numero de Lote es Obligatorio...
+                                            </div>
+
+                                      </div>
+                                    </div>
+
+
+                                        <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Fecha Vencimiento</label>
+                                      <div class="col-sm-10">
+                                        <input type="date"  id="example-date-input" onkeydown="return false" class="form-control"  placeholder="Ingresar Fecha Vencimiento"
+                                            [ngClass]=" Form.controls['fecha_vencimiento'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                            formControlName="fecha_vencimiento" [(ngModel)]="vacunas.fecha_vencimiento"
+                                            >
+                                          
+                                            <div class="invalid-feedback"
+                                            *ngIf="Form.controls['fecha_vencimiento'].touched && 
+                                            Form.controls['fecha_vencimiento'].errors?.required"   >
+                                              Fecha Vencimiento es Obligatorio...
+                                            </div>
+                                      </div>
+                                    </div>
+                                                           
+                
+
+
+                       <div class="form-group row" >
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Numero de Dosis Perdidas</label>
+                                      <div class="col-sm-10">
+                                         <input type="number"  class="form-control"  placeholder="Ingresar Numero de Dosis Perdidas"
+                                            [ngClass]=" Form.controls['numero_dosis_perdidas'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                                            formControlName="numero_dosis_perdidas" [(ngModel)]="vacunas.numero_dosis_perdidas"
+                                            >
+                                          
+
+                                            <div class="invalid-feedback"
+                                            *ngIf="Form.controls['numero_dosis_perdidas'].touched && 
+                                            Form.controls['numero_dosis_perdidas'].errors?.required"   >
+                                             Numero de Dosis Perdidas es Obligatorio...
+                                            </div>
+
+                                             <div class="invalid-feedback"
+                                            *ngIf="Form.controls['numero_dosis_perdidas'].touched && 
+                                            Form.controls['numero_dosis_perdidas'].errors?.pattern"   >
+                                              No se aceptan Letras o Simbolos...
+                                        </div>
+
+                                      </div>
+                                    </div>
+
+
+                                      <div class="form-group row">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Causa de la Perdida</label>
+                                      <div class="col-sm-10">
+                                          <select type="text" class="form-control" placeholder="Ingresar "
+                                      [ngClass]=" Form.controls['causa_perdida'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                                       formControlName="causa_perdida" [(ngModel)]="vacunas.causa_perdida">
+                    
+                                  
+                                      <option value="ruptura">Ruptura</option>
+                                      <option value="perdida de cadena de frio">Perdida de Cadena de Frio</option>
+                                      <option value="error operativo">Error Operativo</option>
+                                    </select>
+                                               
+                                          
+                                            <div class="invalid-feedback"
+                                            *ngIf="Form.controls['causa_perdida'].touched && 
+                                            Form.controls['causa_perdida'].errors?.required"   >
+                                              Causa Perdida es Obligatorio...
+                                            </div>
+                                      </div>
+                                    </div>
+
+
+
+
+
+
+                                
+
+
+                                  
+
+
+
+
+
+
+
+
+
+
+
+
+                                   
+                               
+                                  
+
+
+
+
+
+
+                                  
+                                  
+
+                                   
+                                
+
+                                <button type="submit" style="margin-left:450px; margin-top:40px" [disabled]="Form.invalid" *ngIf="!edit" class="btn btn-primary btn-lg" (click)="Guardar()">Guardar</button>
+                                <button type="submit" style="margin-left:450px; margin-top:40px" [disabled]="Form.invalid" *ngIf="edit" class="btn btn-primary btn-lg" (click)="Actualizar()">Actualizar</button>
+
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                        <!-- end col -->
+
+                        
+                    </div>
+                    <!-- end row -->
+
+
+
+
+
+
+
+
+
+
+                    </form>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!-- container-fluid -->
+
+            </div>
+            <!-- content -->
+
+            <footer class="footer">
+              
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>

@@ -1,0 +1,334 @@
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+     
+
+
+
+
+      <li class="nav-item h-shake">
+        <a [routerLink]="['/inicio']"  href="javascript:void(0)" class="nav-link">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Inicio</p>
+        </a>
+      </li>
+
+
+  
+      <li 
+      class="nav-item has-treeview" [ngClass]=" bibliotecaMenu ? 'menu-open' : 'secondary'"  (click)="bibliotecaMenu = !bibliotecaMenu">
+        <a  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-pie-chart"></i>
+          <p>
+            Biblioteca Virtual
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item h-float">
+            <a [routerLink]="['/biblioteca/admin/form']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Agregar</p>
+            </a>
+          </li>
+          <li class="nav-item h-float">
+            <a [routerLink]="['/biblioteca/admin/list']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon"></i>
+              <p>Listado</p>
+            </a>
+          </li>
+
+      
+
+         
+       
+        </ul>
+      </li>
+
+
+
+     <li 
+      class="nav-item has-treeview" [ngClass]=" tecnicoMenu ? 'menu-open' : 'secondary'"  (click)="tecnicoMenu = !tecnicoMenu">
+        <a  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-pie-chart"></i>
+          <p>
+            Tecnicos
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item h-float">
+            <a [routerLink]="['/tecnicos/admin/form']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Agregar</p>
+            </a>
+          </li>
+          <li class="nav-item h-float">
+            <a [routerLink]="['/tecnicos/admin/list']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon"></i>
+              <p>Listado</p>
+            </a>
+          </li>
+
+      
+
+         
+       
+        </ul>
+      </li>
+
+
+
+
+
+
+
+      <li 
+      class="nav-item has-treeview" [ngClass]=" respuestoMenu ? 'menu-open' : 'secondary'"  (click)="respuestoMenu = !respuestoMenu">
+        <a  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-pie-chart"></i>
+          <p>
+            Repuestos
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item h-float">
+            <a [routerLink]="['/respuestos/admin/form']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Agregar</p>
+            </a>
+          </li>
+          <li class="nav-item h-float">
+            <a [routerLink]="['/respuestos/admin/list']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon"></i>
+              <p>Listado</p>
+            </a>
+          </li>
+
+          <li class="nav-item h-float">
+            <a [routerLink]="['/repuestos/solicitados']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon"></i>
+              <p>Solicitud de Repuestos</p>
+            </a>
+          </li>
+
+         
+       
+        </ul>
+      </li>
+
+
+
+
+
+     
+      <li 
+      class="nav-item has-treeview" [ngClass]=" inventarioMenu ? 'menu-open' : 'secondary'"  (click)="inventarioMenu = !inventarioMenu">
+        <a  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-pie-chart"></i>
+          <p>
+            Inventario
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item h-float">
+            <a [routerLink]="['/inventario/admin/form']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Agregar</p>
+            </a>
+          </li>
+          <li class="nav-item h-float">
+            <a [routerLink]="['/inventario/admin/list']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon"></i>
+              <p>Listado General</p>
+            </a>
+          </li>
+
+          <li class="nav-item h-float">
+            <a [routerLink]="['/inventario/admin/nooperativos']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon"></i>
+              <p>Listado No Operativos</p>
+            </a>
+          </li>
+
+
+          <li class="nav-item h-float">
+            <a [routerLink]="['/inventario/admin/excel-import']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Importar Masivo Excel</p>
+            </a>
+          </li>
+       
+        </ul>
+      </li>
+
+
+
+      
+
+      <li class="nav-item has-treeview" [ngClass]=" centrosaludMenu ? 'menu-open' : 'secondary'"  (click)="centrosaludMenu = !centrosaludMenu">
+        <a  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-pie-chart"></i>
+          <p>
+            Centro Salud
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+
+          
+          <li class="nav-item h-float">
+            <a [routerLink]="['/centrosalud/admin/form']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Agregar</p>
+            </a>
+          </li>
+          
+          <li class="nav-item h-float">
+            <a [routerLink]="['/centrosalud/admin/list']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon"></i>
+              <p>Listado</p>
+            </a>
+          </li>
+       
+        </ul>
+      </li>
+    
+
+      <li 
+          class="nav-item has-treeview" [ngClass]=" usuarioMenu ? 'menu-open' : 'secondary'"  (click)="usuarioMenu = !usuarioMenu" 
+        >
+        <a  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-pie-chart"></i>
+          <p>
+            Usuarios
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item h-float">
+            <a [routerLink]="['/usuario/form']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Agregar</p>
+            </a>
+          </li>
+          <li class="nav-item h-float">
+            <a [routerLink]="['/usuario/list']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon"></i>
+              <p>Listado</p>
+            </a>
+          </li>
+       
+        </ul>
+      </li>
+
+
+
+      <li 
+      class="nav-item has-treeview" [ngClass]=" marcaMenu ? 'menu-open' : 'secondary'"  (click)="marcaMenu = !marcaMenu">
+        <a  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-pie-chart"></i>
+          <p>
+            Marcas
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item h-float">
+            <a [routerLink]="['/marcas/admin/form']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Agregar</p>
+            </a>
+          </li>
+          <li class="nav-item h-float">
+            <a [routerLink]="['/marcas/admin/list']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon"></i>
+              <p>Listado</p>
+            </a>
+          </li>
+
+         
+       
+        </ul>
+      </li>
+     
+
+      <li 
+      class="nav-item has-treeview" [ngClass]=" equipoMenu ? 'menu-open' : 'secondary'"  (click)="equipoMenu = !equipoMenu">
+        <a  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-pie-chart"></i>
+          <p>
+            Equipos
+            <i class="right fa fa-angle-left"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item h-float">
+            <a [routerLink]="['/equipos/admin/form']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon "></i>
+              <p>Agregar</p>
+            </a>
+          </li>
+          <li class="nav-item h-float">
+            <a [routerLink]="['/equipos/admin/list']" class="nav-link">
+              <i class="fa fa-circle-o nav-icon"></i>
+              <p>Listado</p>
+            </a>
+          </li>
+
+         
+       
+        </ul>
+      </li>
+
+
+
+
+
+
+
+
+      
+      <li class="nav-item h-shake">
+        <a [routerLink]="['/historico/admin/list']"  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Historico Inventario</p>
+        </a>
+      </li>
+      
+     
+      
+      <li class="nav-item h-shake">
+        <a [routerLink]="['/inventario/reportes/admin/general']"  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Reportes</p>
+        </a>
+      </li>
+
+      <li class="nav-item h-shake">
+        <a [routerLink]="['/repuestos/solicitados/reportes']"  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Reporte Repuestos</p>
+        </a>
+      </li>
+      
+      
+     
+      <li class="nav-item h-shake">
+        <a  class="nav-link"  data-widget="pushmenu" href="#">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Cerrar Menu</p>
+        </a>
+      </li>
+    
+     
+     
+      <li class="nav-item h-shake">
+        <a (click)="logout()"  class="nav-link" href="javascript:void(0)">
+          <i class="nav-icon fa fa-circle-o text-info"></i>
+          <p>Cerrar Sesión</p>
+        </a>
+      </li>
+    </ul>
+  </nav>

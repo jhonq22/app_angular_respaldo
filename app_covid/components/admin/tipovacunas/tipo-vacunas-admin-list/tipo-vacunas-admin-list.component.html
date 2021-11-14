@@ -1,0 +1,114 @@
+  <div id="wrapper">
+
+        <!-- Top Bar Start -->
+       <app-sidebar></app-sidebar>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+      <app-menu-admin></app-menu-admin>
+        <!-- Left Sidebar End -->
+
+       <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+               
+
+          
+           <div class="container-fluid">
+                    <div class="page-title-box">
+
+                        <div class="row align-items-center ">
+                            <div class="col-md-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Listado de Tipos de Vacunas</h4>
+                                  
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="float-right ">
+                                    <input type="text" class="form-control" [(ngModel)]="filter" name="filter" placeholder="Buscar...">
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page-title -->
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="mt-0 header-title">Listado de Tipos de Vacunas</h4>
+                         
+
+                                    
+
+                                    <div class="table-rep-plugin">
+                                        <div class="table-responsive b-0" data-pattern="priority-columns">
+                                            <table id="tech-companies-1" class="table  table-striped">
+                                                <thead>
+                                         <tr >
+                                                        <th data-priority="1">Tipos de Vacunas</th>
+                                                        <th data-priority="1">Acción</th>
+                                                       
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let tipo of vacunas
+                                          | filter: filter 
+                                          | paginate: { itemsPerPage: 10, currentPage: paginate }
+                                           ;let indice=index">
+
+                                                        <td class="h-float">{{tipo.nombre_vacuna | titlecase}}</td>
+                                    
+                                                                                                      
+                                                        <td> 
+                                                            <a ><img class="h-rotate-360" src="assets/iconos/editar.png" 
+                                                            [routerLink]="['/tiposvacunas/admin/edit', tipo.id]">
+                                                            </a>  
+                                                        </td>
+                                                     
+                                                    </tr>
+                                                
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                                <pagination-controls 
+                    (pageChange)="paginate = $event"  
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" >
+                  </pagination-controls>
+                        </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                </div>
+
+
+
+
+
+            <!-- content -->
+
+            <footer class="footer">
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>

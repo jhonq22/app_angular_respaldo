@@ -1,0 +1,174 @@
+<div class="wrapper">
+
+    <!-- Navbar -->
+   <app-navbar></app-navbar>
+    <!-- /.navbar -->
+  
+    <!-- Main Sidebar Container -->
+  <app-sidebar></app-sidebar>
+  
+    <!-- Content Wrapper. Contains page content -->
+    
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+               
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a [routerLink]="['/tecnicos/admin/list']">Tecnicos</a></li>
+                  <li class="breadcrumb-item active">Agregar</li>
+                </ol>
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+
+          <div class="container-fluid">
+            <div class="row">
+              <!-- left column -->
+
+              <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Agregar Tecnicos</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                 
+                <form role="form" [formGroup]="Form">
+                  <div class="card-body">
+
+                    <div class="form-row">
+
+                      <div class="form-group col-md-12">
+                        <label >Cedula</label>
+                        <input type="text" class="form-control"  placeholder="Ingresar Cedula"
+                        [ngClass]=" Form.controls['cedula'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                        formControlName="cedula" [(ngModel)]="tecnico.cedula"
+                        >
+                       
+                        <div class="invalid-feedback"
+                        *ngIf="Form.controls['cedula'].touched && 
+                         Form.controls['cedula'].errors?.required"   >
+                           Cedula es Obligatorio...
+                        </div>
+                     </div>
+
+
+                        <div class="form-group col-md-12">
+                        <label >Nombres</label>
+                        <input type="text" class="form-control"  placeholder="Ingresar nombres"
+                        [ngClass]=" Form.controls['nombres'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                        formControlName="nombres" [(ngModel)]="tecnico.nombres"
+                        >
+                       
+                        <div class="invalid-feedback"
+                        *ngIf="Form.controls['nombres'].touched && 
+                         Form.controls['nombres'].errors?.required"   >
+                           Nombres es Obligatorio...
+                        </div>
+                     </div>
+
+
+                        <div class="form-group col-md-12">
+                        <label >Apellidos</label>
+                        <input type="text" class="form-control"  placeholder="Ingresar apellidos"
+                        [ngClass]=" Form.controls['apellidos'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                        formControlName="apellidos" [(ngModel)]="tecnico.apellidos"
+                        >
+                       
+                        <div class="invalid-feedback"
+                        *ngIf="Form.controls['apellidos'].touched && 
+                         Form.controls['apellidos'].errors?.required"   >
+                           Apellidos es Obligatorio...
+                        </div>
+                     </div>
+
+                  
+                    </div>
+                   
+
+
+              
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   
+                  
+
+
+                  
+
+
+
+
+
+
+
+                   
+                    
+                    </div>
+                    <!-- /.card-body -->
+    
+                    <div class="card-footer">
+                      <button type="submit" *ngIf="!edit" class="btn btn-primary" (click)="Guardar()">Guardar</button>
+                      <button type="submit" *ngIf="edit" class="btn btn-danger" (click)="Actualizar()">Actualizar</button>
+                    </div>
+                  </form>
+                </div>
+                <!-- /.card -->
+    
+                          
+    
+              
+    
+              </div>
+              <!--/.col (left) -->
+
+
+              <!-- right column -->
+             
+              <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+
+
+
+
+    <!-- /.content-wrapper -->
+    <app-footer></app-footer>
+  
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>

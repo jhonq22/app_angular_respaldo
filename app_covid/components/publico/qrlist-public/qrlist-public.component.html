@@ -1,0 +1,66 @@
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+					<div class="table">
+
+						<div class="row header">
+							<td class="cell" colspan="2">
+								Listado de Vacunado QR
+							</td>
+						
+						
+						
+						</div>
+
+					<div class="row">
+							<div class="font-weight-bold text-center" >Cedula:</div>
+							<div class="cell" *ngIf="vacunas[0]">{{vacunas[0].cedula | titlecase}}</div>
+				    </div>
+
+					<div class="row">
+							<div class="font-weight-bold text-center" >Nombre Y Apellido:</div>
+							<div class="cell" *ngIf="vacunas[0]">{{vacunas[0].nombres | titlecase}} {{vacunas[0].apellidos | titlecase}} </div>
+				    </div>
+
+
+					<div class="row">
+							<div class="font-weight-bold text-center" >Vacuna:</div>
+							<div class="cell" *ngIf="vacunas[0]">{{vacunas[0].nombre_vacuna | titlecase}}</div>
+				    </div>
+
+				
+				<div class="row">
+							<div class="font-weight-bold text-center" >Fecha Dosis 1 / Lote 1:</div>
+							<div class="cell" *ngIf="vacunas[0]">{{vacunas[0].fecha_dosis1 | titlecase}} / {{vacunas[0].lote1 | uppercase }}</div>
+				    </div>
+
+				
+
+				
+					<div class="row">
+							<div class="font-weight-bold text-center" >Fecha Dosis2 / Lote 2:</div>
+							<div class="cell" *ngIf="vacunas[0]">{{vacunas[0].fecha_dosis2 | titlecase}} / {{vacunas[0].lote2 | uppercase }}</div>
+				    </div>
+
+				
+
+				
+
+
+				
+				
+					
+									
+					
+					
+					
+
+
+					
+
+					
+
+					</div>
+			</div>
+		</div>
+	</div>

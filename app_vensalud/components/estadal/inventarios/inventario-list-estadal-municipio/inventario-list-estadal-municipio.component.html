@@ -1,0 +1,288 @@
+
+<div class="wrapper">
+
+    <!-- Navbar -->
+   <app-navbar></app-navbar>
+    <!-- /.navbar -->
+  
+    <!-- Main Sidebar Container -->
+  <app-sidebar></app-sidebar>
+  
+    <!-- Content Wrapper. Contains page content -->
+    
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 >Listado Inventario </h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a [routerLink]="['/inicio']">Inicio</a></li>
+                  <li class="breadcrumb-item active ">Listado Inventario Municipal</li>
+                </ol>
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+
+            
+         
+          
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <button class="btn btn-primary h-shake" [routerLink]="['/inventario/admin/form']">Agregar</button>
+    
+                    <div class="card-tools">
+                      <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text"  name="filter" 
+                        [(ngModel)]="filter" class="form-control float-right" placeholder="Buscar..." >
+    
+                        <div class="input-group-append">
+                          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- /.card-header -->
+                  <div class="card-body table-responsive p-0">
+                    <table class="table table-hover table-bordered" id="my-table">
+                      <tr>
+                        <th>#</th>
+                        <th>Centro Salud</th>
+                        <th>Servicio Médico</th>
+                        <th>Equipo</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Serial</th>
+                        <th>Nro Bien Nacional</th>
+                        <th>Estatus Equipo</th>
+                        <th>Fecha Registro</th>
+                         <th>Acción</th>
+                      </tr>
+                      <tr *ngFor="let inventario of inventarios 
+                      | filter: filter 
+                      | paginate: { itemsPerPage: 5, currentPage: paginate }
+                      ;let indice=index">
+                      <td>{{indice+1}}</td>
+                      <td>{{inventario.centro_salud | titlecase}}</td>
+                      <td>{{inventario.servicio_medico | titlecase}}</td>
+                      <td>{{inventario.equipo | titlecase}}</td>
+                      <td> {{inventario.modelo | titlecase}}</td>
+                      <td>{{inventario.marca_id | titlecase}}</td>
+                      <td>{{inventario.serial | titlecase}}</td>
+                      <td>{{inventario.numero_bien_nacional | titlecase}}</td>
+                      <td>{{inventario.estatu_equipo | titlecase}}</td>
+                      <td>{{inventario.created_at | date}}</td>
+                      
+                        <td>
+                         
+
+                       
+                        
+
+                          <div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                              Acción
+                            </button>
+                            <div class="dropdown-menu">
+                             
+                              <a class="dropdown-item" [routerLink]="['/inventario/admin/edit', inventario.id]" > 
+                                <img class="h-rotate-360"  src="assets/iconos/editar.png" style="width: 20px; height: 20px;" > 
+                                - Editar 
+                              </a>
+
+
+                              <a class="dropdown-item" data-toggle="modal" [attr.data-target]="'#' + inventario.id" > 
+                                <img class="h-rotate-360"  src="assets/iconos/viewlist.png" style="width: 20px; height: 20px;" > 
+                                - Información Completa 
+                              </a>
+
+                              <a class="dropdown-item"  [routerLink]="['/inventario/admin/historico', inventario.id]" > 
+                                <img class="h-rotate-360"  src="assets/iconos/list.png" style="width: 20px; height: 20px;" > 
+                                - Historico 
+                              </a>
+                            </div>
+                          </div>
+                        </td>
+                      
+                        <!-- MODAL-->
+
+                        <div class="modal" id="{{inventario.id}}">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                            
+                              <!-- Modal Header -->
+                              <div class="modal-header">
+                                <h4 class="modal-title">Numero: #{{inventario.id}}</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+                              
+                              <!-- Modal body -->
+                            <div class="modal-body">
+                               <table id="customers">
+                         
+                                <tr>
+                                  <th colspan="5">Datos del Equipo</th>
+                                 
+                                </tr>
+                                <tr>
+                                  <td><b>Estado:</b></td>
+                                  <td>{{inventario.estado}}</td>
+                                </tr>
+        
+                                <tr>
+                                    <td><b>Municipio:</b></td>
+                                    <td>{{inventario.municipio}}</td>
+                                </tr>
+        
+                                <tr>
+                                    <td><b>Centro Salud:</b></td>
+                                    <td>{{inventario.centro_salud | titlecase}}</td>
+                                </tr>
+        
+                                <tr>
+                                    <td><b>Servicio Medico:</b></td>
+                                    <td>{{inventario.servicio_medico}}</td>
+                                </tr>
+        
+                                <tr>
+                                    <td><b>Piso:</b></td>
+                                    <td>{{inventario.piso}}</td>
+                                </tr>
+        
+                                <tr>
+                                    <td><b>Equipo:</b></td>
+                                    <td>{{inventario.equipo}}</td>
+                                </tr>
+        
+                                <tr>
+                                    <td><b>Marca:</b></td>
+                                    <td>{{inventario.marca}}</td>
+                                </tr>
+        
+                                <tr>
+                                    <td><b>Modelo:</b></td>
+                                    <td>{{inventario.modelo}}</td>
+                                </tr>
+        
+                                <tr>
+                                    <td><b>Serial:</b></td>
+                                    <td>{{inventario.serial}}</td>
+                                </tr>
+        
+                                <tr>
+                                    <td><b>Bien Nacional:</b></td>
+                                    <td>{{inventario.numero_bien_nacional}}</td>
+                                </tr>
+        
+                                <tr>
+                                    <td><b>Proveedor:</b></td>
+                                    <td>{{inventario.proveedor}}</td>
+                                </tr>
+        
+                                <tr>
+                                    <td><b>Estatus Equipo:</b></td>
+                                    <td>{{inventario.estatu_equipo }}</td>
+                                </tr>
+        
+                                <tr>
+                                    <td><b>Observación:</b></td>
+                                    <td>{{inventario.observacion }}</td>
+                                </tr>
+        
+                                <tr>
+                                    <td><b>Usuario Cargado:</b></td>
+                                    <td>{{inventario.name | titlecase}} - MISION MEDICA CUBANA</td>
+                                </tr>
+
+
+                                </table>
+                              </div>
+                              
+                              <!-- Modal footer -->
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                              </div>
+                              
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+                        
+                      </tr>
+                                      
+                     
+                    </table>
+
+                    <div class="col-6 mt-2" style="margin-left: 400px;">
+                      <button class="btn btn-primary h-shake"  (click)="generate()"> PDF</button>
+                      <button class="btn btn-danger h-shake" target="_blank" (click)="exportAsXLSX()">Excel</button>
+  
+                    </div>
+
+                    <pagination-controls 
+                    (pageChange)="paginate = $event"  
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente">
+                  </pagination-controls>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div><!-- /.row -->
+
+
+
+
+
+
+
+
+
+
+
+          </div><!-- /.container-fluid -->
+
+
+
+
+
+            
+
+
+
+
+
+
+
+        </section>
+        <!-- /.content -->
+      </div>
+
+
+
+
+    <!-- /.content-wrapper -->
+    <app-footer></app-footer>
+  
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>

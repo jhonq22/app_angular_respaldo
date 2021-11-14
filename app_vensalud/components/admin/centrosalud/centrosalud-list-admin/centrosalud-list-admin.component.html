@@ -1,0 +1,161 @@
+<div class="wrapper">
+
+    <!-- Navbar -->
+   <app-navbar></app-navbar>
+    <!-- /.navbar -->
+  
+    <!-- Main Sidebar Container -->
+ <app-sidebar></app-sidebar>
+  
+    <!-- Content Wrapper. Contains page content -->
+    
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1 >Listado Centro Salud </h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a [routerLink]="['/inicio']">Inicio</a></li>
+                  <li class="breadcrumb-item active ">Centro Salud</li>
+                </ol>
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+          <div class="container-fluid">
+         
+          
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+
+                     
+                    <button class="btn btn-primary"
+                      *ngIf="usuarios?.user.rol_id === 1 || usuarios?.user.rol_id === 2 || usuarios?.user.rol_id === 3"
+                     [routerLink]="['/centrosalud/admin/form']">Agregar</button>
+
+                       <button class="btn btn-primary h-shake" 
+                    *ngIf="usuarios?.user.rol_id === 6"  
+                    [routerLink]="['/inicio']">Inicio</button>
+                    
+                    
+                    
+                    <div class="card-tools">
+                    
+                      
+                      <div class="input-group input-group-sm" style="width: 150px;">
+                        
+                        <input type="text"  name="filter" 
+                        [(ngModel)]="filter" class="form-control float-right" placeholder="Buscar..." >
+    
+                        <div class="input-group-append">
+                          
+                          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                  
+                  <!-- /.card-header -->
+                  <div class="card-body table-responsive p-0">
+                    <table class="table table-hover table-bordered" id="basic-table">
+                      <tr>
+                        <th>#</th>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                        <th>Municipio</th>
+                        <th>Tipo Hospital</th>
+                        <th>Dirección</th>
+                        <th>Telefono Contacto</th>
+                        <th>Email Contacto</th>
+                        <th *ngIf="usuarios?.user.rol_id === 1 || usuarios?.user.rol_id === 2 || usuarios?.user.rol_id === 3">Editar</th>
+                        
+                      </tr>
+                      <tr *ngFor="let centro of centrosalud 
+                      | filter: filter
+                    
+                      | paginate: { itemsPerPage: 10, currentPage: paginate }
+                      ;let indice=index">
+                          <td>{{indice+1}}</td>
+                        <td class="h-float">{{centro.id}}</td>
+                        <td class="h-float">{{centro.centro_salud | titlecase}}</td>
+                        <td class="h-float">{{centro.estado | titlecase}}</td>
+                        <td class="h-float">{{centro.municipio  | titlecase}}</td>
+                        <td class="h-float">{{centro.tipo }}</td>
+                        <td class="h-float">{{centro.direccion  | titlecase}}</td>
+                        <td class="h-float">{{centro.contacto_tlf  | titlecase}}</td>
+                        <td class="h-float">{{centro.contacto_email  | titlecase}}</td>
+                        <td >
+                          <a > 
+                          <img class="h-rotate-360"
+                          *ngIf="usuarios?.user.rol_id === 1 || usuarios?.user.rol_id === 2 || usuarios?.user.rol_id === 3"
+                           src="assets/iconos/editar.png" [routerLink]="['/centrosalud/admin/edit', centro.id]">
+                        </a>  
+                        </td>
+                       
+                        
+                      </tr>
+                                       
+                     
+                    </table>
+                    <div class="col-6 mt-2" style="margin-left: 400px;">
+                    
+
+                  </div>
+                    <pagination-controls 
+                    (pageChange)="paginate = $event"  
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" >
+                  </pagination-controls>
+
+
+
+                  
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+              </div>
+            </div><!-- /.row -->
+          </div><!-- /.container-fluid -->
+
+
+
+
+
+            
+
+
+
+
+
+
+
+        </section>
+        <!-- /.content -->
+      </div>
+
+
+
+
+    <!-- /.content-wrapper -->
+    <app-footer></app-footer>
+  
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>

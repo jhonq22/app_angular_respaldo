@@ -1,0 +1,305 @@
+<div class="wrapper">
+
+    <!-- Navbar -->
+   <app-navbar></app-navbar>
+   <!-- /.navbar -->
+ 
+   <!-- Main Sidebar Container -->
+ <app-sidebar></app-sidebar>
+
+
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+           
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a [routerLink]="['/inventario/admin/list']">Inventario</a></li>
+              <li class="breadcrumb-item active">Historico</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+
+
+
+      <div class="container-fluid">
+       <div class="row">
+          <div class="col-12">
+            <!-- Custom Tabs -->
+            <div class="card">
+              <div class="card-header d-flex p-0">
+                <h3 class="card-title p-3">Inventario Equipo</h3>
+                <ul class="nav nav-pills ml-auto p-2">
+                  <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">Informacion Equipo</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Historico Estatus</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab">Galeria</a></li>
+                
+                </ul>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tab_1">
+                    <div class="col-lg-12 col-12">
+                      <table id="customers">
+                         
+                        <tr>
+                          <th colspan="5">Datos del Equipo</th>
+                         
+                        </tr>
+                        <tr>
+                          <td><b>Codigo Vensalud:</b></td>
+                          <td *ngIf="inventario[0]">#{{inventario[0].id}}</td>
+                        </tr>
+                        <tr>
+                          <td><b>Estado:</b></td>
+                          <td *ngIf="inventario[0]">{{inventario[0].estado | titlecase}}</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Municipio:</b></td>
+                            <td *ngIf="inventario[0]">{{inventario[0].municipio | titlecase}}</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Centro Salud:</b></td>
+                             <td *ngIf="inventario[0]">{{inventario[0].centro_salud | titlecase}}</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Servicio Medico:</b></td>
+                             <td *ngIf="inventario[0]">{{inventario[0].servicio_medico}}</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Piso:</b></td>
+                             <td *ngIf="inventario[0]">{{inventario[0].piso}}</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Equipo:</b></td>
+                             <td *ngIf="inventario[0]">{{inventario[0].equipo}}</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Marca:</b></td>
+                             <td *ngIf="inventario[0]">{{inventario[0].marca}}</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Modelo:</b></td>
+                             <td *ngIf="inventario[0]">{{inventario[0].modelo}}</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Serial:</b></td>
+                             <td *ngIf="inventario[0]">{{inventario[0].serial}}</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Bien Nacional:</b></td>
+                             <td *ngIf="inventario[0]">{{inventario[0].numero_bien_nacional}}</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Proveedor:</b></td>
+                             <td *ngIf="inventario[0]">{{inventario[0].proveedor}}</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Estatus Equipo:</b></td>
+                             <td *ngIf="inventario[0]">{{inventario[0].estatu_equipo }}</td>
+                        </tr>
+
+                        <tr>
+                          <td><b>Condición:</b></td>
+                           <td *ngIf="inventario[0]">{{inventario[0].reparado }}</td>
+                      </tr>
+
+
+                        <tr>
+                            <td><b>Observación:</b></td>
+                             <td *ngIf="inventario[0]">{{inventario[0].observacion }}</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>Usuario Cargado:</b></td>
+                             <td *ngIf="inventario[0]">{{inventario[0].name | titlecase}}</td>
+                        </tr>
+
+
+                        </table>
+                          
+                    
+                    </div>
+                  </div>
+
+
+                  <!-- /.tab-pane 2 -->
+                  <div class="tab-pane" id="tab_2">
+                    <div class="container">
+
+                        <div class="row">
+                         <div class="col-lg-12 col-12">
+         
+                           <table id="customers">
+                             <tr>
+                               <th>#</th>
+                               <th>Estatus</th>
+                               <th>Observacion</th>
+                               <th>Fecha</th>
+                               <th>Usuario Registrador</th>
+                               <th>Centro Salud</th>
+                              
+                             </tr>
+                             <tr  *ngFor="let data of historico 
+                               | paginate: { itemsPerPage: 5, currentPage: paginate }
+                             ;let indice=index">
+                             <td>{{indice+1}}</td>
+                             <td>{{data.estatu_equipo}}</td>
+                             <td>{{data.observacion}}</td>
+                             <td>{{data.created_at | date}}</td>
+                             <td>{{data.name}}</td>
+                             <td>{{data.centro_salud}}</td>
+                             </tr>
+         
+                          
+                          
+                           </table>
+                           <pagination-controls 
+                           (pageChange)="paginate = $event"  
+                           previousLabel="Anterior"
+                           nextLabel="Siguiente">
+                         </pagination-controls>
+                           
+                        </div>     
+         
+         
+               </div>
+         
+             </div>
+                  </div>
+
+
+                  <!-- /.tab-pane3  -->
+                  <div class="tab-pane" id="tab_3">
+                    <h3>Subir Archivo</h3>
+
+                      <div class="form-group">
+                          <input
+                              type="file"
+                              name="imagen"
+                              (change)="fileProgress($event)"
+                          >
+                      </div>
+
+                      <div class="progress" *ngIf="fileUploadProgress" >
+                          <div
+                              class="progress-bar w-100"
+                              role="progressbar"
+                              aria-valuenow="100"
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                          >
+                              Subiendo Archivo: {{ fileUploadProgress }}
+                          </div>
+                      </div>
+
+                      <div class="image-preview mb-3" *ngIf="previewUrl">
+                          <img [src]="previewUrl" style="height: 200px; width:200px;">
+                      </div>
+
+                    <div class="mb-3" *ngIf="uploadedFilePath">
+                        {{uploadedFilePath}}
+                    </div>
+               
+
+
+                      <button type="submit" class="btn btn-primary" (click)="SubirImagen()">Guardar</button>
+
+
+                      <div class="row">
+                        
+                        
+                        <div class="col-2 mt-5 " *ngFor="let galerias of galeria" >
+                            <img class="img-thumbnail" data-toggle="modal"  
+                            [attr.data-target]="'#' + galerias.id"
+                             [src]="galerias.imagen" 
+                            style="width: 125px; height: 125px;">
+                         
+                         
+                         
+                            <!-- MODAL DE CAGADA IMAGEN DE LA GALERIA-->
+                            <div class="modal" id="{{galerias.id}}">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                
+                                  <!-- Modal Header -->
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">{{galerias.nombre_archivo}}</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  </div>
+                                  
+                                  <!-- Modal body -->
+                                  <div class="modal-body">
+                                    <img [src]="galerias.imagen"   style="width: 425px; height: 425px;" >
+                                  </div>
+                                  
+                                  <!-- Modal footer -->
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-danger"  data-dismiss="modal" (click)="EliminarFotoGaleria(galerias.id)">Eliminar</button>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                         
+                         
+                         
+                          </div>
+
+
+
+                      </div>
+
+
+
+                  </div>
+                  <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+            </div>
+            <!-- ./card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+
+
+
+<!-- /.content-wrapper -->
+<app-footer></app-footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+  <!-- Control sidebar content goes here -->
+</aside>
+
+
+</div> 

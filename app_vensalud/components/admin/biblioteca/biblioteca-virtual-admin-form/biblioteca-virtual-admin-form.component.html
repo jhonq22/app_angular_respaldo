@@ -1,0 +1,242 @@
+<div class="wrapper">
+
+    <!-- Navbar -->
+   <app-navbar></app-navbar>
+    <!-- /.navbar -->
+  
+    <!-- Main Sidebar Container -->
+  <app-sidebar></app-sidebar>
+  
+    <!-- Content Wrapper. Contains page content -->
+    
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+               
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a [routerLink]="['/biblioteca/admin/list']">Biblioteca</a></li>
+                  <li class="breadcrumb-item active">Agregar</li>
+                </ol>
+              </div>
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+
+          <div class="container-fluid">
+            <div class="row">
+              <!-- left column -->
+
+              <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Agregar Biblibioteca Virtual</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                 
+                <form role="form" [formGroup]="Form">
+                  <div class="card-body">
+
+                 
+               
+                     
+              <div class="form-row">
+                      
+                      <div class="form-group col-md-12">
+                        <label>Tipo Biblioteca</label>
+                        <select type="text" class="form-control" placeholder="Ingresar"
+                     [ngClass]=" Form.controls['tipo_bibloteca'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                      formControlName="tipo_bibloteca" [(ngModel)]="biblioteca.tipo_bibloteca">
+                    
+                    <option value="manual">Manual</option>
+                    <option value="catalogo">Catalogo</option>
+                                   
+                   
+                    </select>
+
+                    <div class="invalid-feedback"
+                    *ngIf="Form.controls['tipo_bibloteca'].touched && 
+                     Form.controls['tipo_bibloteca'].errors?.required"   >
+                        Tipo Biblioteca es Obligatorio...
+                    </div>
+
+
+                     </div>
+                 </div>
+ 
+
+
+
+                  
+
+            <div class="form-row" *ngIf="biblioteca.tipo_bibloteca == 'manual'">
+                <div class="form-group col-md-12">
+                  <label >Equipo:</label>
+                  <input type="text" class="form-control" placeholder="Ingresar Equipo "
+                  [ngClass]=" Form.controls['equipo'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                  formControlName="equipo" [(ngModel)]="biblioteca.equipo"           
+                  >
+               </div>
+            </div>   
+
+
+             <div class="form-row" *ngIf="biblioteca.tipo_bibloteca == 'manual'">
+                <div class="form-group col-md-12">
+                  <label >Marca:</label>
+                  <input type="text" class="form-control" placeholder="Ingresar Marca "
+                  [ngClass]=" Form.controls['marca'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                  formControlName="marca" [(ngModel)]="biblioteca.marca"           
+                  >
+               </div>
+            </div>   
+
+
+             <div class="form-row">
+                <div class="form-group col-md-12" *ngIf="biblioteca.tipo_bibloteca == 'manual'">
+                  <label >Modelo:</label>
+                  <input type="text" class="form-control" placeholder="Ingresar Modelo"
+                  [ngClass]=" Form.controls['modelo'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                  formControlName="modelo" [(ngModel)]="biblioteca.modelo"           
+                  >
+               </div>
+            </div>  
+                           
+                   
+
+
+              <div class="form-row">
+                      
+                    <div class="form-group col-md-12">
+                      <label>Descripción</label>
+                      <textarea type="text" class="form-control" placeholder="Ingresar Descripción "
+                      [ngClass]=" Form.controls['descripcion'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                      formControlName="descripcion" [(ngModel)]="biblioteca.descripcion"           
+                      >
+                        
+                    </textarea>
+
+
+                     <div class="invalid-feedback"
+                    *ngIf="Form.controls['descripcion'].touched && 
+                     Form.controls['descripcion'].errors?.required"   >
+                        Descripción es Obligatorio...
+                    </div>
+                   </div>
+               </div>
+
+
+
+
+   <h3>Subir Archivo</h3>
+
+                      <div class="form-group">
+                          <input
+                              type="file"
+                              name="url_archivo"
+                              (change)="fileProgress($event)"
+                          >
+                      </div>
+
+                      <div class="progress" *ngIf="fileUploadProgress" >
+                          <div
+                              class="progress-bar w-100"
+                              role="progressbar"
+                              aria-valuenow="100"
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                          >
+                              Subiendo Archivo: {{ fileUploadProgress }}
+                          </div>
+                      </div>
+
+                      <div class="image-preview mb-3" *ngIf="previewUrl">
+                          <img [src]="previewUrl" style="height: 200px; width:200px;">
+                      </div>
+
+                    <div class="mb-3" *ngIf="uploadedFilePath">
+                        {{uploadedFilePath}}
+                    </div>
+              
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                   
+                  
+
+
+                  
+
+
+
+
+
+
+
+                   
+                    
+                    </div>
+                    <!-- /.card-body -->
+    
+                    <div class="card-footer">
+                      <button type="submit" *ngIf="!edit" class="btn btn-primary" (click)="SubirImagen()">Guardar</button>
+                      <button type="submit" *ngIf="edit" class="btn btn-danger" (click)="ActualizarMarcas()">Actualizar</button>
+                    </div>
+                  </form>
+                </div>
+                <!-- /.card -->
+    
+                          
+    
+              
+    
+              </div>
+              <!--/.col (left) -->
+
+
+              <!-- right column -->
+             
+              <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+
+
+
+
+    <!-- /.content-wrapper -->
+    <app-footer></app-footer>
+  
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>

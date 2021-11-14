@@ -1,0 +1,211 @@
+<div class="wrapper">
+
+    <!-- Navbar -->
+   <app-navbar></app-navbar>
+    <!-- /.navbar -->
+  
+    <!-- Main Sidebar Container -->
+  <app-sidebar></app-sidebar>
+  
+    <!-- Content Wrapper. Contains page content -->
+    
+
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+               
+              </div>
+             
+            </div>
+          </div><!-- /.container-fluid -->
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+
+          <div class="container-fluid">
+            <div class="row">
+              <!-- left column -->
+
+              <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Solicitar Repuesto de Equipo -----------            Codigo Vensalud:#{{parametro_id}}</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                 
+                <form role="form" [formGroup]="Form">
+                  <div class="card-body">
+
+                    <div class="form-row">
+
+
+                        <div class="form-group col-md-6">
+                            <label>Piezas de Repuestos</label>
+                            <select type="text" class="form-control" placeholder="Ingresar Centro de Salud"
+                             [ngClass]=" Form.controls['repuesto_id'].valid ? 'is-valid state-valid' : 'is-invalid state-invalid'"
+                             formControlName="repuesto_id" [(ngModel)]="detalles.repuesto_id"           
+                            >
+                        
+                          <option *ngFor="let marca of repuestos" value="{{marca.id}}">{{marca.nombre_repuesto}}</option>
+                        </select>
+            
+                                <div class="invalid-feedback"
+                                *ngIf="Form.controls['repuesto_id'].touched && 
+                                Form.controls['repuesto_id'].errors?.required"   >
+                                    Repuestos es Obligatorio...
+                                </div>
+                         </div>
+
+
+
+
+                      <div class="form-group col-md-6">
+                        <label >Cantidad</label>
+                        <input type="text" class="form-control"  placeholder="Ingresar Cantidad"
+                        [ngClass]=" Form.controls['cantidad_pedido'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                        formControlName="cantidad_pedido" [(ngModel)]="detalles.cantidad_pedido"
+                        >
+                       
+                        <div class="invalid-feedback"
+                        *ngIf="Form.controls['cantidad_pedido'].touched && 
+                         Form.controls['cantidad_pedido'].errors?.required"   >
+                           Cantidad es Obligatorio...
+                        </div>
+                     </div>
+
+                  
+                    </div>
+                   
+
+                    <div class="form-row">
+
+       
+
+
+
+
+                      <div class="form-group col-md-6">
+                        <label >Fecha de Solicitud</label>
+                        <input type="date" class="form-control"  placeholder="Ingresar Fecha"
+                        [ngClass]=" Form.controls['fecha_solicitud'].valid ? 'is-valid fa fa-check ' : 'is-invalid'"
+                        formControlName="fecha_solicitud" [(ngModel)]="detalles.fecha_solicitud"
+                        >
+                       
+                        <div class="invalid-feedback"
+                        *ngIf="Form.controls['fecha_solicitud'].touched && 
+                         Form.controls['fecha_solicitud'].errors?.required"   >
+                           Fecha de Solicitud es Obligatorio...
+                        </div>
+                     </div>
+
+                  
+                    </div>
+
+
+              
+
+                                 
+                    
+                    </div>
+                    <!-- /.card-body -->
+    
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary" (click)="GuardarDetallesEquipos()">Guardar</button>
+                    
+                    </div>
+                  </form>
+                </div>
+                <!-- /.card -->
+    
+                          
+    
+              
+    
+              </div>
+              <!--/.col (left) -->
+
+
+              <!-- right column -->
+             
+              <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+
+
+
+
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover table-bordered" id="basic-table">
+                  <tr class="bg-dark">
+                    <th>#</th>
+                    <th>Marca</th>
+                    <th>Equipo</th>
+                    <th>Nombre Repuesto</th>
+                    <th>Cantidad Solicitado</th>
+                    <th>Fecha Solicitud</th>
+                    
+                  </tr>
+                  <tr *ngFor="let respuestolistados of respuestolistado 
+                  
+                
+                  | paginate: { itemsPerPage: 10, currentPage: paginate }
+                  ;let indice=index">
+                      <td>{{indice+1}}</td>
+                      <td class="h-float">{{respuestolistados.marca | titlecase}}</td>
+                      <td class="h-float">{{respuestolistados.equipo | titlecase}}</td>
+                      <td class="h-float">{{respuestolistados.nombre_repuesto | titlecase}}</td>
+                      <td class="h-float">{{respuestolistados.cantidad_pedido | titlecase}}</td>
+                      <td class="h-float">{{respuestolistados.fecha_solicitud | date}}</td>
+                   
+                   
+                    
+                  </tr>
+                                   
+                 
+                </table>
+                <div class="col-6 mt-2" style="margin-left: 400px;">
+                
+
+              </div>
+                <pagination-controls 
+                (pageChange)="paginate = $event"  
+                previousLabel="Anterior"
+                nextLabel="Siguiente" >
+              </pagination-controls>
+
+
+
+              
+              </div>
+
+
+
+
+
+
+
+
+
+          </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+
+
+
+
+    <!-- /.content-wrapper -->
+    <app-footer></app-footer>
+  
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>

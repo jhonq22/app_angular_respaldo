@@ -1,0 +1,81 @@
+  <div class="left side-menu">
+            <div class="slimscroll-menu" id="remove-scroll">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu" id="side-menu">
+                        <li class="menu-title">Menu Configuración</li>
+                    
+
+
+
+                          <li> <a   (click)="UsuariosMenu = !UsuariosMenu" class="waves-effect mm-active"><i class="dripicons-mail"></i><span> Usuarios 
+                            <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                            <ul class="submenu mm-collapse " [ngClass]=" UsuariosMenu ? 'mm-show' : 'secondary'" >
+                                <li><a [routerLink]="['/usuarios/configuracion/form']">Agregar </a></li>
+                                  <li><a [routerLink]="['/usuarios/configuracion/list']">Listado </a></li>
+                           
+                       </ul>
+                        </li>
+                    
+
+
+
+                                 <li>
+                            <a   (click)="CentroSaludMenu = !CentroSaludMenu" class="waves-effect mm-active"><i class="dripicons-mail"></i><span> Centro Salud 
+                            <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                            <ul class="submenu mm-collapse " [ngClass]=" CentroSaludMenu ? 'mm-show' : 'secondary'" >
+                                <li><a [routerLink]="['/centrosalud/admin/form']">Agregar </a></li>
+                                  <li><a [routerLink]="['/centrosalud/admin/list']">Listado </a></li>
+                           
+                            </ul>
+                        </li>  
+
+                    
+                        
+
+                    
+                     <li>
+                            <a [routerLink]="['/usuarios/admin/actualizar/password', usuarios.user.id]"  href="javascript:void(0)" class="waves-effect">
+                                <i class="dripicons-meter"></i> <span> Cambiar Contraseña </span>
+                            </a>
+                        </li>
+     
+
+
+
+                       <li>
+                            <a (click)="logout()" href="javascript:void(0)" class="waves-effect">
+                                <i class="dripicons-meter"></i> <span> Cerrar Sesion </span>
+                            </a>
+                        </li>
+
+                     
+
+             
+
+                  
+
+                      
+
+
+
+                     
+
+                     
+
+                    
+
+                   
+
+                    </ul>
+
+                </div>
+                <!-- Sidebar -->
+                <div class="clearfix"></div>
+
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>

@@ -1,0 +1,150 @@
+  <div id="wrapper">
+
+        <!-- Top Bar Start -->
+       <app-sidebar></app-sidebar>
+        <!-- Top Bar End -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+      <app-menu-general></app-menu-general>
+        <!-- Left Sidebar End -->
+
+       <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content">
+
+               
+
+          
+           <div class="container-fluid">
+                    <div class="page-title-box">
+
+                        <div class="row align-items-center ">
+                            <div class="col-md-8">
+                                <div class="page-title-box">
+                                    <h4 class="page-title">Listado de Vacunados Estadal</h4>
+                                  
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="float-right ">
+                                    <input type="text" class="form-control" [(ngModel)]="filter" name="filter" placeholder="Buscar...">
+                   
+                                  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page-title -->
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="mt-0 header-title">Listado de Vacunados Estadal</h4>
+                                       <div class="float-right ">
+                                  
+                                    <button class="btn btn-danger h-shake mb-2 mr-2" target="_blank" (click)="exportAsXLSX()">Exportar Excel</button>
+                                  
+                                </div>
+                                    
+                         
+
+                                    
+
+                                    <div class="table-rep-plugin">
+                                        <div class="table-responsive b-0" data-pattern="priority-columns">
+                                            <table id="tech-companies-1" class="table  table-striped">
+                                                <thead>
+                                         <tr >
+                                                        <th data-priority="1">Cédula</th>
+                                                        <th data-priority="3">Nombre y Apellido</th>
+                                                        <th data-priority="1">Sexo</th>
+                                                        <th data-priority="1">Fecha Nacimiento</th>
+                                                        <th data-priority="1">Teléfono</th>
+                                                        <th data-priority="1">Correo Electrónico</th>
+                                                        <th data-priority="1">Estado</th>
+                                                        <th data-priority="1">Municipio</th>
+                                                        <th data-priority="1">Tipo Vacuna</th>
+                                                        <th data-priority="1">Imagen QR</th>
+                                                       
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let vacuna of vacunas
+                                          | filter: filter 
+                                          | paginate: { itemsPerPage: 5, currentPage: paginate }
+                                           ;let indice=index">
+
+                                                        <td class="h-float">{{vacuna.cedula | titlecase}}</td>
+                                                        <td class="h-float">{{vacuna.nombres | titlecase}} {{vacuna.apellidos | titlecase}}</td>
+                                                        <td class="h-float">{{vacuna.sexo | titlecase}}</td>
+                                                        <td class="h-float">{{vacuna.fecha_nacimiento | date}}</td>
+                                                        <td class="h-float">{{vacuna.telefono | titlecase}}</td>
+                                                        <td class="h-float">{{vacuna.email | titlecase}}</td>
+                                                        <td class="h-float">{{vacuna.estado | titlecase}}</td>
+                                                        <td class="h-float">{{vacuna.municipio | titlecase}}</td>
+                                                       <td class="h-float">{{vacuna.nombre_vacuna | titlecase}}</td>
+                                                        <td class="h-float">
+                                                        
+                                                        
+                                           <ngx-qrcode *ngIf="vacuna.cedula  && vacuna.fecha_dosis1 && vacuna.dosis1 && vacuna.dosis2 
+                                           && vacuna.fecha_dosis2 && vacuna.lote1 && vacuna.lote2"
+  
+                                          [errorCorrectionLevel]="correctionLevel"
+                                         [value]="valueqr + vacuna.cedula"
+                                          alt="Demo QR Code"
+                                          cssClass="bshadow">
+                                          </ngx-qrcode>
+                                                          
+                                                        
+                                                        </td>
+                                              
+                                                    
+                                                       
+                                                     
+                                                    </tr>
+                                                
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        
+
+                                    </div>
+
+                                    
+
+                                </div>
+                            </div>
+                              <pagination-controls 
+                    (pageChange)="paginate = $event"  
+                    previousLabel="Anterior"
+                    nextLabel="Siguiente" >
+                  </pagination-controls>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                </div>
+
+
+
+
+
+            <!-- content -->
+
+            <footer class="footer">
+            </footer>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+
+    </div>

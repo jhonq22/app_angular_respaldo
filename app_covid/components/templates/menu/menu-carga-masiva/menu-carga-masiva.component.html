@@ -1,0 +1,80 @@
+<div class="left side-menu">
+    <div class="slimscroll-menu" id="remove-scroll">
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu" id="side-menu">
+                <li class="menu-title">Menu Cargador Masivo</li>
+            
+
+
+
+
+
+
+                <li>
+                    <a   (click)="VacunasMasivas = !VacunasMasivas" class="waves-effect mm-active"><i class="dripicons-mail"></i><span> Importar Vacunados Masivo 
+                    <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                    <ul class="submenu mm-collapse " [ngClass]=" VacunasMasivas ? 'mm-show' : 'secondary'" >
+                        <li><a [routerLink]="['/vacunados/importar/admin/form']">Importar Excel </a></li>
+                        <li><a [routerLink]="['/vacunados/importar/admin/list']">Listado </a></li>
+                        <li><a [routerLink]="['/vacunados/master/patria/form']">Vacunados Master </a></li>
+                        
+                   
+                    </ul>
+                </li>
+
+           
+
+                
+
+                
+
+
+
+                
+
+                  <li>
+                    <a [routerLink]="['/usuarios/admin/actualizar/password', usuarios.user.id]"  href="javascript:void(0)" class="waves-effect">
+                        <i class="dripicons-meter"></i> <span> Cambiar Contraseña </span>
+                    </a>
+                </li>
+
+            
+
+
+               <li>
+                    <a (click)="logout()" href="javascript:void(0)" class="waves-effect">
+                        <i class="dripicons-meter"></i> <span> Cerrar Sesion </span>
+                    </a>
+                </li>
+
+             
+
+     
+
+          
+
+              
+
+
+
+             
+
+             
+
+            
+
+           
+
+            </ul>
+
+        </div>
+        <!-- Sidebar -->
+        <div class="clearfix"></div>
+
+    </div>
+    <!-- Sidebar -left -->
+
+</div>
